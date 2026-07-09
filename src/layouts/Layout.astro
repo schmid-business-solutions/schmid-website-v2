@@ -1,0 +1,91 @@
+---
+import '../styles/global.css';
+---
+
+<!doctype html>
+<html lang="de-CH" class="scroll-smooth">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content="Ivan Schmid - Business Consultant & Unternehmer. Strategie, Innovation, Wachstum. 25+ Jahre Erfahrung. Steffisburg, Schweiz." />
+		<meta name="keywords" content="Business Consultant, Strategie, Innovation, Wachstum, Unternehmer, Schweiz, Thun, VR-Mandate, Payment Solutions" />
+		<meta name="author" content="Ivan Schmid" />
+		<meta name="geo.region" content="CH-BE" />
+		<meta name="geo.placename" content="Steffisburg, Thun, Switzerland" />
+		<meta name="geo.position" content="46.7355;7.9155" />
+		<meta property="og:title" content="Ivan Schmid - Business Consultant & Strategie-Experte" />
+		<meta property="og:description" content="Ich begleite Unternehmen bei Strategie, Innovation und Wachstum mit 25+ Jahren Unternehmererfahrung." />
+		<meta property="og:type" content="business.business" />
+		<meta property="og:locale" content="de_CH" />
+		<link rel="canonical" href="https://ivanschmid.com" />
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif:wght@400;500;600;700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+		<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Ivan Schmid - Business Consultant & Strategie-Experte</title>
+	</head>
+	<body class="bg-surface text-on-surface font-body-md overflow-x-hidden selection:bg-tertiary-container-fixed selection:text-on-primary-fixed">
+		<slot />
+		<script>
+			// Scroll progress indicator
+			window.onscroll = function() {
+				var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+				var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+				var scrolled = (winScroll / height) * 100;
+				const progressBar = document.getElementById("progress-bar");
+				if (progressBar) {
+					progressBar.style.width = scrolled + "%";
+				}
+			};
+
+			// Mobile menu toggle
+			document.addEventListener('DOMContentLoaded', () => {
+				const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+				const mobileMenu = document.getElementById('mobile-menu');
+
+				if (mobileMenuBtn && mobileMenu) {
+					mobileMenuBtn.addEventListener('click', function() {
+						mobileMenu.classList.toggle('hidden');
+					});
+
+					// Close menu when clicking a link
+					document.querySelectorAll('#mobile-menu a').forEach(link => {
+						link.addEventListener('click', function() {
+							mobileMenu.classList.add('hidden');
+						});
+					});
+				}
+			});
+		</script>
+	</body>
+</html>
+
+<style is:global>
+	@media (max-width: 768px) {
+		nav { padding-left: 8px !important; padding-right: 8px !important; }
+		nav > div:first-child { min-width: auto; }
+		nav > div:first-child span { font-size: 12px !important; }
+		nav > div:nth-child(2) { margin-left: auto !important; }
+		button { display: flex !important; align-items: center !important; margin-left: auto !important; }
+		section:first-of-type { padding-top: 12px !important; }
+		h1 { font-size: 24px !important; line-height: 32px !important; }
+		.hero-desc { font-size: 14px !important; }
+		.hero-btn { padding: 12px 16px !important; font-size: 14px !important; }
+		.aspect-\[21\/9\] { aspect-ratio: 16/9 !important; }
+		h2 { font-size: 20px !important; line-height: 28px !important; }
+		input, textarea { width: 100% !important; box-sizing: border-box !important; }
+		form { display: grid !important; grid-template-columns: 1fr !important; gap: 12px !important; }
+		.md\:grid-cols-2 { grid-template-columns: 1fr !important; }
+		button[type="submit"] { text-align: center !important; width: 100% !important; display: flex !important; justify-content: center !important; align-items: center !important; }
+		.max-w-max-width { padding: 20px !important; }
+		.mt-20 { margin-top: 12px !important; padding: 0 !important; }
+		.px-gutter { padding-left: 8px !important; padding-right: 8px !important; }
+		.rounded-\[40px\] { margin: 16px 8px !important; padding: 24px 16px !important; }
+		#experience { margin-top: 20px !important; }
+		#experience > div { text-align: left !important; }
+		#experience .flex { justify-content: flex-start !important; }
+		#experience h2 { margin-left: 0 !important; margin-right: auto !important; }
+		footer > div:last-child { padding-top: 16px !important; }
+		.flex > a, button[type="submit"] { padding: 10px 20px !important; height: 48px !important; display: flex !important; align-items: center !important; justify-content: center !important; box-sizing: border-box !important; }
+		.flex > a:hover, button[type="submit"]:hover { box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important; transform: translateY(-2px) !important; }
+	}
+</style>

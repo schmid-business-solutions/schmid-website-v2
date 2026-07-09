@@ -1,0 +1,16 @@
+// @ts-check
+import { defineConfig } from 'astro/config';
+
+// https://astro.build/config
+export default defineConfig({
+	output: 'static',
+	site: 'https://ivanschmid.com',
+	vite: {
+		ssr: {
+			external: ['svgo']
+		}
+	},
+	build: {
+		outDir: './dist',
+	}
+});
