@@ -30,6 +30,7 @@
 			class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:border-tertiary-container focus:ring-2 focus:ring-tertiary-container/20 transition-all outline-none"
 			placeholder="Worum geht es?"
 			type="text"
+			required
 		/>
 	</div>
 	<div class="col-span-1 md:col-span-2">
@@ -45,10 +46,11 @@
 	<div class="col-span-1 md:col-span-2 mb-2">
 		<p class="text-label-sm text-on-surface-variant/70 leading-relaxed">Mit dem Absenden des Formulars erklären Sie sich mit der Verarbeitung Ihrer Daten gemäss der Schweizer Datenschutzgesetzgebung einverstanden.</p>
 	</div>
+	<div id="form-status" class="col-span-1 md:col-span-2 hidden rounded-xl px-4 py-3 text-sm font-medium" role="status" aria-live="polite"></div>
 	<div class="col-span-1 md:col-span-2">
 		<button
 			id="submit-btn"
-			class="w-full py-4 bg-tertiary-container text-white rounded-full font-headline-sm hover:brightness-90 hover:shadow-lg transition-all active:scale-95"
+			class="w-full py-4 bg-tertiary-container text-white rounded-full font-headline-sm hover:brightness-90 hover:shadow-lg transition-all active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed"
 			type="submit"
 		>Anfrage senden</button>
 	</div>
@@ -62,9 +64,32 @@
 
 	const form = document.getElementById('contact-form');
 	const submitBtn = document.getElementById('submit-btn');
+	const statusBox = document.getElementById('form-status');
+
+	function showStatus(kind, text) {
+		if (!statusBox) return;
+		statusBox.textContent = text;
+		statusBox.classList.remove('hidden');
+		if (kind === 'success') {
+			statusBox.style.backgroundColor = '#ecfdf5';
+			statusBox.style.color = '#065f46';
+			statusBox.style.border = '1px solid #a7f3d0';
+		} else {
+			statusBox.style.backgroundColor = '#fef2f2';
+			statusBox.style.color = '#991b1b';
+			statusBox.style.border = '1px solid #fecaca';
+		}
+	}
+
+	function hideStatus() {
+		if (!statusBox) return;
+		statusBox.classList.add('hidden');
+		statusBox.textContent = '';
+	}
 
 	form?.addEventListener('submit', async (e) => {
 		e.preventDefault();
+		hideStatus();
 
 		if (submitBtn) {
 			submitBtn.disabled = true;
@@ -75,7 +100,7 @@
 			to_email: 'office@ivanschmid.com',
 			from_name: document.getElementById('name')?.value,
 			from_email: document.getElementById('email')?.value,
-			request: document.getElementById('request')?.value || 'Nicht angegeben',
+			request: document.getElementById('request')?.value,
 			message: document.getElementById('message')?.value,
 			subject: 'Website Anfrage von ivanschmid.com'
 		};
@@ -83,35 +108,21 @@
 		try {
 			await emailjs.send('service_ivanschmid', 'template_ivanschmid', templateParams);
 
-			if (submitBtn) {
-				submitBtn.textContent = 'Anfrage erfolgreich gesendet!';
-				submitBtn.style.backgroundColor = '#10b981';
-			}
-
+			showStatus('success', 'Vielen Dank! Ihre Anfrage wurde erfolgreich versendet. Wir melden uns in Kürze bei Ihnen.');
 			form.reset();
 
-			setTimeout(() => {
-				if (submitBtn) {
-					submitBtn.disabled = false;
-					submitBtn.textContent = 'Anfrage senden';
-					submitBtn.style.backgroundColor = '';
-				}
-			}, 3000);
+			if (submitBtn) {
+				submitBtn.disabled = false;
+				submitBtn.textContent = 'Anfrage senden';
+			}
 		} catch (error) {
 			console.error('Failed to send email:', error);
+			showStatus('error', 'Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut oder schreiben Sie direkt an office@ivanschmid.com.');
 
 			if (submitBtn) {
-				submitBtn.textContent = 'Fehler beim Senden. Versuchen Sie es später erneut.';
-				submitBtn.style.backgroundColor = '#ef4444';
+				submitBtn.disabled = false;
+				submitBtn.textContent = 'Anfrage senden';
 			}
-
-			setTimeout(() => {
-				if (submitBtn) {
-					submitBtn.disabled = false;
-					submitBtn.textContent = 'Anfrage senden';
-					submitBtn.style.backgroundColor = '';
-				}
-			}, 3000);
 		}
 	});
 </script>
