@@ -17,8 +17,9 @@ import CookieBanner from '../components/CookieBanner.astro';
   .hero-btn { padding: 12px 16px !important; font-size: 14px !important; }
   #expertise { padding-top: 64px !important; padding-bottom: 40px !important; margin-top: 32px !important; border-top: 1px solid rgba(0, 0, 0, 0.1); }
   #payment { padding-top: 48px !important; padding-bottom: 48px !important; }
-  #about .relative { order: 2; margin-top: 40px; }
-  #about .grid > div:last-child { order: 1; }
+  #about { padding-top: 48px !important; }
+  #about .about-grid { grid-template-areas: "heading" "img" "body" !important; grid-template-columns: 1fr !important; }
+  #about .about-img { margin-top: 24px; margin-bottom: 24px; }
   .aspect-\[21\/9\] { aspect-ratio: 16/9 !important; }
   h2 { font-size: 20px !important; line-height: 28px !important; }
   input, textarea { width: 100% !important; box-sizing: border-box !important; }
@@ -36,6 +37,13 @@ import CookieBanner from '../components/CookieBanner.astro';
   footer > div:last-child { padding-top: 16px !important; }
   .flex > a, button[type="submit"] { padding: 10px 20px !important; height: 48px !important; display: flex !important; align-items: center !important; justify-content: center !important; box-sizing: border-box !important; }
   .flex > a:hover, button[type="submit"]:hover { box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important; transform: translateY(-2px) !important; }
+}
+#about .about-img { grid-area: img; }
+#about .about-heading { grid-area: heading; }
+#about .about-body { grid-area: body; }
+@media (min-width: 1024px) {
+  #about .about-grid { grid-template-areas: "img heading" "img body" !important; grid-template-columns: 1fr 1fr !important; }
+  #about .about-img { margin-top: 0; margin-bottom: 0; }
 }
 </style><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/><script is:inline src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script is:inline id="tailwind-config">try{try{
   tailwind.config = {
@@ -264,8 +272,8 @@ import CookieBanner from '../components/CookieBanner.astro';
 </section>
 <!-- Über Ivan Schmid Section -->
 <section class="py-section-gap bg-surface-container-low overflow-hidden animate-reveal" data-stitch-orig-opacity="0" id="about" style="transform: translateY(20px); transition: opacity 0.8s ease-out, transform 0.8s ease-out;">
-<div class="max-w-max-width mx-auto px-gutter grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-<div class="relative">
+<div class="about-grid max-w-max-width mx-auto px-gutter grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+<div class="about-img relative">
 <div class="aspect-[4/5] rounded-3xl overflow-hidden shadow-xl bg-white border-8 border-white">
 <img class="w-full h-full object-cover" data-alt="A high-quality professional portrait of a senior Swiss business consultant in his 50s with a confident and approachable expression. He is wearing a tailored navy suit without a tie, reflecting a modern corporate humanist style. The setting is a bright, minimalist studio with soft, even lighting that emphasizes professionalism and trust. The background is a clean, neutral grey-white tone." src="/portrait.webp"/>
 </div>
@@ -275,7 +283,8 @@ import CookieBanner from '../components/CookieBanner.astro';
 <div class="text-tertiary-fixed font-label-lg">Jahre Unternehmerpraxis</div>
 </div>
 </div>
-<div class=""><span class="text-tertiary-container font-label-lg uppercase tracking-widest block mb-4">Gründer &amp; Experte</span><h2 class="font-headline-lg text-headline-lg text-on-surface mb-8">Ich bin Unternehmer <span class="font-bold">aus Überzeugung.</span></h2><div class="space-y-6 mb-10"><p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">Mich begeistert es, Ideen zu entwickeln und daraus erfolgreiche Produkte, Unternehmen und Plattformen entstehen zu lassen.</p><p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">Während mehr als 25 Jahren durfte ich Unternehmen gründen, Teams aufbauen, digitale Produkte entwickeln und Organisationen durch unterschiedliche Wachstumsphasen begleiten. Diese Erfahrungen bringe ich heute in Beratungsmandate und Verwaltungsratsfunktionen ein.</p><p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">Ich arbeite pragmatisch, partnerschaftlich und mit einem klaren Fokus auf die erfolgreiche Umsetzung. Gute Lösungen entstehen für mich durch gegenseitiges Vertrauen, offene Gespräche und eine langfristige Zusammenarbeit.</p></div></div>
+<div class="about-heading"><span class="text-tertiary-container font-label-lg uppercase tracking-widest block mb-4">Gründer &amp; Experte</span><h2 class="font-headline-lg text-headline-lg text-on-surface mb-0 lg:mb-8">Ich bin Unternehmer <span class="font-bold">aus Überzeugung.</span></h2></div>
+<div class="about-body space-y-6 mb-10"><p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">Mich begeistert es, Ideen zu entwickeln und daraus erfolgreiche Produkte, Unternehmen und Plattformen entstehen zu lassen.</p><p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">Während mehr als 25 Jahren durfte ich Unternehmen gründen, Teams aufbauen, digitale Produkte entwickeln und Organisationen durch unterschiedliche Wachstumsphasen begleiten. Diese Erfahrungen bringe ich heute in Beratungsmandate und Verwaltungsratsfunktionen ein.</p><p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">Ich arbeite pragmatisch, partnerschaftlich und mit einem klaren Fokus auf die erfolgreiche Umsetzung. Gute Lösungen entstehen für mich durch gegenseitiges Vertrauen, offene Gespräche und eine langfristige Zusammenarbeit.</p></div>
 </div>
 </section>
 <!-- Unternehmerische Erfahrung Section -->
