@@ -20,6 +20,8 @@ import CookieBanner from '../components/CookieBanner.astro';
   #about { padding-top: 48px !important; }
   #about .about-grid { grid-template-areas: "heading" "img" "body" !important; grid-template-columns: 1fr !important; }
   #about .about-img { margin-top: 24px; margin-bottom: 24px; }
+  #about .about-heading { text-align: center !important; }
+  #kontakt .text-center { text-align: center !important; }
   .aspect-\[21\/9\] { aspect-ratio: 16/9 !important; }
   h2 { font-size: 20px !important; line-height: 28px !important; }
   input, textarea { width: 100% !important; box-sizing: border-box !important; }
@@ -31,9 +33,7 @@ import CookieBanner from '../components/CookieBanner.astro';
   .px-gutter { padding-left: 8px !important; padding-right: 8px !important; }
   .rounded-\[40px\] { margin: 16px 8px !important; padding: 24px 16px !important; }
   #experience { margin-top: 20px !important; }
-  #experience > div { text-align: left !important; }
-  #experience .flex { justify-content: flex-start !important; }
-  #experience h2 { margin-left: 0 !important; margin-right: auto !important; }
+  #experience > div:last-child { text-align: left !important; }
   footer > div:last-child { padding-top: 16px !important; }
   .flex > a, button[type="submit"] { padding: 10px 20px !important; height: 48px !important; display: flex !important; align-items: center !important; justify-content: center !important; box-sizing: border-box !important; }
   .flex > a:hover, button[type="submit"]:hover { box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important; transform: translateY(-2px) !important; }
