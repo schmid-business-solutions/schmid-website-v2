@@ -1,5 +1,6 @@
 ---
 import ContactForm from '../components/ContactForm.astro';
+import CookieBanner from '../components/CookieBanner.astro';
 ---
 <!DOCTYPE html>
 
@@ -409,8 +410,8 @@ import ContactForm from '../components/ContactForm.astro';
 </div>
 <div class="">
 <ul class="space-y-4">
-<li class=""><a class="text-tertiary-container underline hover:opacity-80 transition-all font-body-md font-semibold" href="#">Impressum</a></li>
-<li class=""><a class="text-tertiary-container underline hover:opacity-80 transition-all font-body-md font-semibold" href="#">Datenschutz</a></li>
+<li class=""><a class="text-tertiary-container underline hover:opacity-80 transition-all font-body-md font-semibold" href="/impressum/">Impressum</a></li>
+<li class=""><a class="text-tertiary-container underline hover:opacity-80 transition-all font-body-md font-semibold" href="/datenschutz/">Datenschutz</a></li>
 </ul>
 </div>
 </div>
@@ -496,4 +497,5 @@ document.querySelectorAll('input[placeholder], textarea[placeholder]').forEach(f
     }
   });
 });
-</script></body></html>
+</script><CookieBanner />
+</body></html>
