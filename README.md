@@ -1,46 +1,34 @@
-# Astro Starter Kit: Basics
+# ivanschmid.com
+
+Astro-Projekt für die persönliche Website von Ivan Schmid (Schmid³ Business Solutions).
+
+## Lokal entwickeln
 
 ```sh
-npm create astro@latest -- --template basics
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Dev-Server läuft unter `http://localhost:4321`.
 
-## 🚀 Project Structure
+## Deployment
 
-Inside of your Astro project, you'll see the following folders and files:
+Hostinger liest den Ordner `public/` direkt aus diesem Git-Repository (kein Node-Build auf dem Server).
+`public/` wird deshalb **nicht von Hand** bearbeitet, sondern automatisch aus den Astro-Quellen
+(`src/pages/index.astro`, `src/components/`) erzeugt:
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
-```
+1. Änderungen an `src/` auf `main` pushen.
+2. GitHub Action (`.github/workflows/build-deploy.yml`) führt `npm run build` aus, das Ergebnis landet
+   direkt in `public/` (siehe `astro.config.mjs`: `outDir: './public'`).
+3. Die Action committet den aktualisierten `public/`-Ordner automatisch zurück auf `main`.
+4. Hostinger zieht den neuen Stand von GitHub (automatisch oder manuell im hPanel unter "Git").
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+Statische Rohassets (Bilder, Favicon) liegen in `static-src/` (Astros `publicDir`), nicht in `public/`.
 
-## 🧞 Commands
+**Wichtig:** Damit Schritt 3 funktioniert, muss unter GitHub → Settings → Actions → General →
+"Workflow permissions" die Option "Read and write permissions" aktiviert sein.
 
-All commands are run from the root of the project, from a terminal:
+## Kontaktformular
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+`src/components/ContactForm.astro` versendet Anfragen über [EmailJS](https://www.emailjs.com)
+(Service `service_ivanschmid`, Template `template_ivanschmid`) an office@ivanschmid.com.

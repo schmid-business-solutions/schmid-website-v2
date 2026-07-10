@@ -1,3 +1,6 @@
+---
+import ContactForm from '../components/ContactForm.astro';
+---
 <!DOCTYPE html>
 
 <html class="scroll-smooth" data-lt-installed="true" lang="de-CH" style=""><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta name="description" content="Ivan Schmid - Business Consultant & Unternehmer. Strategie, Innovation, Wachstum. 25+ Jahre Erfahrung. Steffisburg, Schweiz."/><meta name="keywords" content="Business Consultant, Strategie, Innovation, Wachstum, Unternehmer, Schweiz, Thun, VR-Mandate, Payment Solutions"/><meta name="author" content="Ivan Schmid"/><meta name="geo.region" content="CH-BE"/><meta name="geo.placename" content="Steffisburg, Thun, Switzerland"/><meta name="geo.position" content="46.7355;7.9155"/><meta property="og:title" content="Ivan Schmid - Business Consultant & Strategie-Experte"/><meta property="og:description" content="Ich begleite Unternehmen bei Strategie, Innovation und Wachstum mit 25+ Jahren Unternehmererfahrung."/><meta property="og:type" content="business.business"/><meta property="og:locale" content="de_CH"/><link rel="canonical" href="https://ivanschmid.com"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Noto+Serif:wght@400;500;600;700&amp;family=Public+Sans:wght@400;500;600&amp;display=swap" rel="stylesheet"/><style>
@@ -29,7 +32,7 @@
   .flex > a, button[type="submit"] { padding: 10px 20px !important; height: 48px !important; display: flex !important; align-items: center !important; justify-content: center !important; box-sizing: border-box !important; }
   .flex > a:hover, button[type="submit"]:hover { box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important; transform: translateY(-2px) !important; }
 }
-</style><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">try{try{
+</style><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/><script is:inline src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script is:inline id="tailwind-config">try{try{
   tailwind.config = {
     darkMode: "class",
     theme: {
@@ -350,27 +353,7 @@
 <p class="text-on-surface-variant font-body-lg">Vereinbaren Sie ein unverbindliches Erstgespräch für Ihre unternehmerischen Herausforderungen.</p>
 </div>
 <div class="bg-surface-container-lowest border border-outline-variant/30 rounded-3xl p-8 md:p-12 shadow-sm">
-<form action="#" class="grid grid-cols-1 md:grid-cols-2 gap-8" method="POST">
-<div class="col-span-1 md:col-span-2">
-<label class="block text-on-surface-variant font-label-lg mb-2">Name</label>
-<input class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:border-tertiary-container focus:ring-2 focus:ring-tertiary-container/20 transition-all outline-none" placeholder="Max Müller" type="text"/>
-</div>
-<div class="col-span-1 md:col-span-2">
-<label class="block text-on-surface-variant font-label-lg mb-2">E-Mail Adresse</label>
-<input class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:border-tertiary-container focus:ring-2 focus:ring-tertiary-container/20 transition-all outline-none" placeholder="name@firma.ch" type="email"/>
-</div>
-<div class="col-span-1 md:col-span-2">
-<label class="block text-on-surface-variant font-label-lg mb-2">Anfrage</label>
-<input class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:border-tertiary-container focus:ring-2 focus:ring-tertiary-container/20 transition-all outline-none" placeholder="Worum geht es?" type="text"/>
-</div>
-<div class="col-span-1 md:col-span-2">
-<label class="block text-on-surface-variant font-label-lg mb-2">Nachricht</label>
-<textarea class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:border-tertiary-container focus:ring-2 focus:ring-tertiary-container/20 transition-all outline-none resize-none" placeholder="Wie kann ich Ihnen helfen?" rows="4"></textarea>
-</div>
-<div class="col-span-1 md:col-span-2 mb-2"><p class="text-label-sm text-on-surface-variant/70 leading-relaxed">Mit dem Absenden des Formulars erklären Sie sich mit der Verarbeitung Ihrer Daten gemäss der Schweizer Datenschutzgesetzgebung einverstanden.</p></div><div class="col-span-1 md:col-span-2">
-<button class="w-full py-4 bg-tertiary-container text-white rounded-full font-headline-sm hover:brightness-90 hover:shadow-lg transition-all active:scale-95" type="submit">Anfrage senden</button>
-</div>
-</form>
+<ContactForm />
 </div>
 <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
 <div>
