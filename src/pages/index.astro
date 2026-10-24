@@ -24,7 +24,7 @@ import ContactForm from '../components/ContactForm.astro';
 		<section class="intro container">
 			<p class="lead">
 				Ich bin Unternehmer aus Überzeugung. Seit über 25 Jahren baue ich Unternehmen, Produkte und digitale
-				Plattformen auf – unter anderem als Gründer von Payrexx, Hotelcard und Comvation.
+				Plattformen auf – unter anderem als Gründer von Payrexx, Hotelcard, Comvation und 1Daily.
 			</p>
 			<a class="partner" href="https://www.payrexx.com/?ref=s32026" target="_blank" rel="noopener">
 				<span class="partner-rule" aria-hidden="true"></span>
@@ -108,6 +108,7 @@ import ContactForm from '../components/ContactForm.astro';
 		line-height: 1.35;
 		color: var(--ink);
 		text-wrap: balance;
+		font-variant-numeric: lining-nums;
 	}
 
 	.partner {
@@ -183,14 +184,11 @@ import ContactForm from '../components/ContactForm.astro';
 		}
 
 		.hero-image {
-			aspect-ratio: 4 / 3;
+			aspect-ratio: 16 / 9;
 		}
 	}
 
 	@media (max-width: 520px) {
-		.hero-image {
-			aspect-ratio: 1 / 1;
-		}
 
 		.lead {
 			text-wrap: pretty;
