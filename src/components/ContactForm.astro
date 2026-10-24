@@ -1,128 +1,183 @@
 ---
-// ContactForm.astro - EmailJS integrated contact form component
+// ContactForm.astro – schlankes Kontaktformular, Versand über EmailJS
 ---
 
-<form id="contact-form" class="grid grid-cols-1 md:grid-cols-2 gap-8" method="POST">
-	<div class="col-span-1 md:col-span-2">
-		<label class="block text-on-surface-variant font-label-lg mb-2">Name</label>
-		<input
-			id="name"
-			class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:border-tertiary-container focus:ring-2 focus:ring-tertiary-container/20 transition-all outline-none"
-			placeholder="Max Müller"
-			type="text"
-			required
-		/>
+<form id="contact-form" class="contact-form" novalidate>
+	<div class="field">
+		<label for="cf-name">Name</label>
+		<input id="cf-name" name="name" type="text" autocomplete="name" required />
 	</div>
-	<div class="col-span-1 md:col-span-2">
-		<label class="block text-on-surface-variant font-label-lg mb-2">E-Mail Adresse</label>
-		<input
-			id="email"
-			class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:border-tertiary-container focus:ring-2 focus:ring-tertiary-container/20 transition-all outline-none"
-			placeholder="name@firma.ch"
-			type="email"
-			required
-		/>
+	<div class="field">
+		<label for="cf-email">E-Mail</label>
+		<input id="cf-email" name="email" type="email" autocomplete="email" required />
 	</div>
-	<div class="col-span-1 md:col-span-2">
-		<label class="block text-on-surface-variant font-label-lg mb-2">Anfrage</label>
-		<input
-			id="request"
-			class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:border-tertiary-container focus:ring-2 focus:ring-tertiary-container/20 transition-all outline-none"
-			placeholder="Worum geht es?"
-			type="text"
-			required
-		/>
+	<div class="field">
+		<label for="cf-message">Nachricht</label>
+		<textarea id="cf-message" name="message" rows="5" required></textarea>
 	</div>
-	<div class="col-span-1 md:col-span-2">
-		<label class="block text-on-surface-variant font-label-lg mb-2">Nachricht</label>
-		<textarea
-			id="message"
-			class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:border-tertiary-container focus:ring-2 focus:ring-tertiary-container/20 transition-all outline-none resize-none"
-			placeholder="Wie kann ich Ihnen helfen?"
-			rows="4"
-			required
-		></textarea>
-	</div>
-	<div class="col-span-1 md:col-span-2 mb-2">
-		<p class="text-label-sm text-on-surface-variant/70 leading-relaxed">Mit dem Absenden des Formulars erklären Sie sich mit der Verarbeitung Ihrer Daten gemäss der Schweizer Datenschutzgesetzgebung einverstanden.</p>
-	</div>
-	<div id="form-status" class="col-span-1 md:col-span-2 hidden rounded-xl px-4 py-3 text-sm font-medium" role="status" aria-live="polite"></div>
-	<div class="col-span-1 md:col-span-2">
-		<button
-			id="submit-btn"
-			class="w-full py-4 bg-tertiary-container text-white rounded-full font-headline-sm hover:brightness-90 hover:shadow-lg transition-all active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed"
-			type="submit"
-		>Anfrage senden</button>
-	</div>
+	<p class="consent">
+		Ihre Angaben werden nur zur Beantwortung Ihrer Anfrage verwendet. Mehr dazu in der <a href="/datenschutz/">Datenschutzerklärung</a>.
+	</p>
+	<div id="form-status" class="status" role="status" aria-live="polite" hidden></div>
+	<button id="submit-btn" type="submit">Nachricht senden</button>
 </form>
+
+<style>
+	.contact-form {
+		display: grid;
+		gap: 18px;
+	}
+
+	.field {
+		display: grid;
+		gap: 6px;
+	}
+
+	label {
+		font-size: 14px;
+		font-weight: 600;
+		color: var(--ink);
+	}
+
+	input,
+	textarea {
+		width: 100%;
+		font: inherit;
+		font-size: 16px;
+		color: var(--ink);
+		background: var(--paper);
+		border: 1px solid var(--line);
+		border-radius: 10px;
+		padding: 12px 14px;
+		transition: border-color 0.15s, box-shadow 0.15s;
+	}
+
+	textarea {
+		resize: vertical;
+		min-height: 130px;
+	}
+
+	input:focus,
+	textarea:focus {
+		outline: none;
+		border-color: var(--gold);
+		box-shadow: 0 0 0 3px rgba(179, 155, 60, 0.18);
+	}
+
+	.consent {
+		margin: 0;
+		font-size: 13px;
+		line-height: 1.5;
+		color: var(--ink-soft);
+	}
+
+	button {
+		justify-self: start;
+		font: inherit;
+		font-size: 15px;
+		font-weight: 700;
+		color: #fff;
+		background: var(--ink);
+		border: 0;
+		border-radius: 999px;
+		padding: 13px 28px;
+		cursor: pointer;
+		transition: background 0.15s;
+	}
+
+	button:hover {
+		background: var(--gold-dark);
+	}
+
+	button:disabled {
+		opacity: 0.6;
+		cursor: default;
+	}
+
+	.status {
+		font-size: 15px;
+		line-height: 1.5;
+		border-radius: 10px;
+		padding: 12px 14px;
+	}
+
+	.status[data-kind='success'] {
+		background: #f3f7ef;
+		color: #335a26;
+		border: 1px solid #d5e4c9;
+	}
+
+	.status[data-kind='error'] {
+		background: #fcf1f0;
+		color: #8a2a1f;
+		border: 1px solid #f0d3cf;
+	}
+
+	@media (max-width: 520px) {
+		button {
+			justify-self: stretch;
+		}
+	}
+</style>
 
 <script is:inline src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4.4.1/dist/email.min.js"></script>
 <script is:inline>
-	emailjs.init({
-		publicKey: 'FQeBWdwkjiwk9aYxl'
-	});
+	(function () {
+		var form = document.getElementById('contact-form');
+		var btn = document.getElementById('submit-btn');
+		var statusBox = document.getElementById('form-status');
+		if (!form) return;
 
-	const form = document.getElementById('contact-form');
-	const submitBtn = document.getElementById('submit-btn');
-	const statusBox = document.getElementById('form-status');
-
-	function showStatus(kind, text) {
-		if (!statusBox) return;
-		statusBox.textContent = text;
-		statusBox.classList.remove('hidden');
-		if (kind === 'success') {
-			statusBox.style.backgroundColor = '#ecfdf5';
-			statusBox.style.color = '#065f46';
-			statusBox.style.border = '1px solid #a7f3d0';
-		} else {
-			statusBox.style.backgroundColor = '#fef2f2';
-			statusBox.style.color = '#991b1b';
-			statusBox.style.border = '1px solid #fecaca';
-		}
-	}
-
-	function hideStatus() {
-		if (!statusBox) return;
-		statusBox.classList.add('hidden');
-		statusBox.textContent = '';
-	}
-
-	form?.addEventListener('submit', async (e) => {
-		e.preventDefault();
-		hideStatus();
-
-		if (submitBtn) {
-			submitBtn.disabled = true;
-			submitBtn.textContent = 'Wird gesendet...';
+		if (window.emailjs) {
+			emailjs.init({ publicKey: 'FQeBWdwkjiwk9aYxl' });
 		}
 
-		const templateParams = {
-			to_email: 'schmidmobile@gmail.com',
-			from_name: document.getElementById('name')?.value,
-			from_email: document.getElementById('email')?.value,
-			request: document.getElementById('request')?.value,
-			message: document.getElementById('message')?.value,
-			subject: 'Website Anfrage von ivanschmid.com'
-		};
+		function showStatus(kind, text) {
+			statusBox.textContent = text;
+			statusBox.dataset.kind = kind;
+			statusBox.hidden = false;
+		}
 
-		try {
-			await emailjs.send('service_mtfmush', 'template_ws51hqc', templateParams);
+		form.addEventListener('submit', function (e) {
+			e.preventDefault();
+			statusBox.hidden = true;
 
-			showStatus('success', 'Vielen Dank! Ihre Anfrage wurde erfolgreich versendet. Wir melden uns in Kürze bei Ihnen.');
-			form.reset();
-
-			if (submitBtn) {
-				submitBtn.disabled = false;
-				submitBtn.textContent = 'Anfrage senden';
+			if (!form.checkValidity()) {
+				form.reportValidity();
+				return;
 			}
-		} catch (error) {
-			console.error('Failed to send email:', error);
-			showStatus('error', 'Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut oder schreiben Sie direkt an office@ivanschmid.com.');
 
-			if (submitBtn) {
-				submitBtn.disabled = false;
-				submitBtn.textContent = 'Anfrage senden';
+			if (!window.emailjs) {
+				showStatus('error', 'Das Formular ist gerade nicht verfügbar. Bitte schreiben Sie direkt an office@ivanschmid.com.');
+				return;
 			}
-		}
-	});
+
+			btn.disabled = true;
+			btn.textContent = 'Wird gesendet …';
+
+			var params = {
+				to_email: 'schmidmobile@gmail.com',
+				from_name: form.name.value.trim(),
+				from_email: form.email.value.trim(),
+				request: 'Kontaktformular ivanschmid.com',
+				message: form.message.value.trim(),
+				subject: 'Website Anfrage von ivanschmid.com'
+			};
+
+			emailjs
+				.send('service_mtfmush', 'template_ws51hqc', params)
+				.then(function () {
+					showStatus('success', 'Vielen Dank für Ihre Nachricht. Ich melde mich zeitnah persönlich bei Ihnen.');
+					form.reset();
+				})
+				.catch(function (err) {
+					console.error('EmailJS:', err);
+					showStatus('error', 'Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut oder schreiben Sie direkt an office@ivanschmid.com.');
+				})
+				.finally(function () {
+					btn.disabled = false;
+					btn.textContent = 'Nachricht senden';
+				});
+		});
+	})();
 </script>

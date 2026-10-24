@@ -1,92 +1,170 @@
 ---
-import '../styles/global.css';
+import '@fontsource-variable/manrope';
+
+interface Props {
+	title: string;
+	description?: string;
+	noindex?: boolean;
+}
+
+const {
+	title,
+	description = 'Ivan Schmid – Unternehmer aus Steffisburg. Seit über 25 Jahren baue ich Unternehmen, Produkte und digitale Plattformen auf.',
+	noindex = false,
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
 ---
 
 <!doctype html>
-<html lang="de-CH" class="scroll-smooth">
+<html lang="de-CH">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="description" content="Ivan Schmid - Business Consultant & Unternehmer. Strategie, Innovation, Wachstum. 25+ Jahre Erfahrung. Steffisburg, Schweiz." />
-		<meta name="keywords" content="Business Consultant, Strategie, Innovation, Wachstum, Unternehmer, Schweiz, Thun, VR-Mandate, Payment Solutions" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
 		<meta name="author" content="Ivan Schmid" />
-		<meta name="geo.region" content="CH-BE" />
-		<meta name="geo.placename" content="Steffisburg, Thun, Switzerland" />
-		<meta name="geo.position" content="46.7355;7.9155" />
-		<meta property="og:title" content="Ivan Schmid - Business Consultant & Strategie-Experte" />
-		<meta property="og:description" content="Ich begleite Unternehmen bei Strategie, Innovation und Wachstum mit 25+ Jahren Unternehmererfahrung." />
-		<meta property="og:type" content="business.business" />
+		{noindex && <meta name="robots" content="noindex" />}
+		<link rel="canonical" href={canonical} />
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+		<link rel="icon" href="/favicon.ico" sizes="any" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
 		<meta property="og:locale" content="de_CH" />
-		<link rel="canonical" href="https://ivanschmid.com" />
-		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Serif:wght@400;500;600;700&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
-		<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=block" rel="stylesheet" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Ivan Schmid - Business Consultant & Strategie-Experte</title>
+		<meta property="og:url" content={canonical} />
+		<meta property="og:image" content={new URL('/portrait.webp', Astro.site).href} />
 	</head>
-	<body class="bg-surface text-on-surface font-body-md overflow-x-hidden selection:bg-tertiary-container-fixed selection:text-on-primary-fixed">
+	<body>
+		<header class="site-header">
+			<a href="/" class="logo" aria-label="Schmid Business Solutions – Startseite">
+				<span class="logo-mark">SCHMID<sup>3</sup></span>
+				<span class="logo-sub">Business Solutions</span>
+			</a>
+		</header>
+
 		<slot />
-		<script>
-			// Scroll progress indicator
-			window.onscroll = function() {
-				var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-				var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-				var scrolled = (winScroll / height) * 100;
-				const progressBar = document.getElementById("progress-bar");
-				if (progressBar) {
-					progressBar.style.width = scrolled + "%";
-				}
-			};
 
-			// Mobile menu toggle
-			document.addEventListener('DOMContentLoaded', () => {
-				const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-				const mobileMenu = document.getElementById('mobile-menu');
-
-				if (mobileMenuBtn && mobileMenu) {
-					mobileMenuBtn.addEventListener('click', function() {
-						mobileMenu.classList.toggle('hidden');
-					});
-
-					// Close menu when clicking a link
-					document.querySelectorAll('#mobile-menu a').forEach(link => {
-						link.addEventListener('click', function() {
-							mobileMenu.classList.add('hidden');
-						});
-					});
-				}
-			});
-		</script>
+		<footer class="site-footer">
+			<span>© {new Date().getFullYear()} Schmid Business Solutions</span>
+			<nav aria-label="Rechtliches">
+				<a href="/impressum/">Impressum</a>
+				<a href="/datenschutz/">Datenschutz</a>
+			</nav>
+		</footer>
 	</body>
 </html>
 
 <style is:global>
-	@media (max-width: 768px) {
-		nav { padding-left: 8px !important; padding-right: 8px !important; }
-		nav > div:first-child { min-width: auto; }
-		nav > div:first-child span { font-size: 12px !important; }
-		nav > div:nth-child(2) { margin-left: auto !important; }
-		button { display: flex !important; align-items: center !important; margin-left: auto !important; }
-		section:first-of-type { padding-top: 12px !important; }
-		h1 { font-size: 34px !important; line-height: 40px !important; }
-		.hero-desc { font-size: 14px !important; }
-		.hero-btn { padding: 12px 16px !important; font-size: 14px !important; }
-		#payment.py-section-gap { padding-top: 48px !important; padding-bottom: 48px !important; }
-		.aspect-\[21\/9\] { aspect-ratio: 16/9 !important; }
-		h2 { font-size: 20px !important; line-height: 28px !important; }
-		input, textarea { width: 100% !important; box-sizing: border-box !important; }
-		form { display: grid !important; grid-template-columns: 1fr !important; gap: 12px !important; }
-		.md\:grid-cols-2 { grid-template-columns: 1fr !important; }
-		button[type="submit"] { text-align: center !important; width: 100% !important; display: flex !important; justify-content: center !important; align-items: center !important; }
-		.max-w-max-width { padding: 20px !important; }
-		.mt-20 { margin-top: 12px !important; padding: 0 !important; }
-		.px-gutter { padding-left: 8px !important; padding-right: 8px !important; }
-		.rounded-\[40px\] { margin: 16px 8px !important; padding: 24px 16px !important; }
-		#experience { margin-top: 20px !important; }
-		#experience > div { text-align: left !important; }
-		#experience .flex { justify-content: flex-start !important; }
-		#experience h2 { margin-left: 0 !important; margin-right: auto !important; }
-		footer > div:last-child { padding-top: 16px !important; }
-		.flex > a, button[type="submit"] { padding: 10px 20px !important; height: 48px !important; display: flex !important; align-items: center !important; justify-content: center !important; box-sizing: border-box !important; }
-		.flex > a:hover, button[type="submit"]:hover { box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important; transform: translateY(-2px) !important; }
+	:root {
+		--ink: #2b2d30;
+		--ink-soft: #5c5f64;
+		--line: #e3e1dc;
+		--paper: #ffffff;
+		--paper-2: #f7f6f3;
+		--gold: #b39b3c;
+		--gold-dark: #8f7b2b;
+		--radius: 14px;
+		color-scheme: light;
+	}
+
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+	}
+
+	html {
+		-webkit-text-size-adjust: 100%;
+	}
+
+	body {
+		margin: 0;
+		background: var(--paper);
+		color: var(--ink);
+		font-family: 'Manrope Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+		font-size: 17px;
+		line-height: 1.65;
+		-webkit-font-smoothing: antialiased;
+		min-height: 100vh;
+		display: flex;
+		flex-direction: column;
+	}
+
+	main {
+		flex: 1;
+	}
+
+	a {
+		color: var(--gold-dark);
+	}
+
+	.wrap {
+		width: 100%;
+		max-width: 640px;
+		margin: 0 auto;
+		padding: 0 24px;
+	}
+
+	.site-header {
+		width: 100%;
+		max-width: 640px;
+		margin: 0 auto;
+		padding: 40px 24px 0;
+	}
+
+	.logo {
+		display: inline-flex;
+		flex-direction: column;
+		line-height: 1;
+		text-decoration: none;
+	}
+
+	.logo-mark {
+		color: var(--gold);
+		font-weight: 800;
+		font-size: 22px;
+		letter-spacing: 0.16em;
+	}
+
+	.logo-mark sup {
+		font-size: 0.6em;
+		font-weight: 800;
+		letter-spacing: 0;
+		margin-left: 1px;
+	}
+
+	.logo-sub {
+		color: var(--ink-soft);
+		font-size: 13px;
+		font-weight: 400;
+		letter-spacing: 0.04em;
+		margin-top: 6px;
+	}
+
+	.site-footer {
+		width: 100%;
+		max-width: 640px;
+		margin: 0 auto;
+		padding: 32px 24px 40px;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px 24px;
+		justify-content: space-between;
+		color: var(--ink-soft);
+		font-size: 13px;
+	}
+
+	.site-footer nav {
+		display: flex;
+		gap: 20px;
+	}
+
+	.site-footer a {
+		color: var(--ink-soft);
+		text-decoration: none;
+	}
+
+	.site-footer a:hover {
+		color: var(--gold-dark);
 	}
 </style>
