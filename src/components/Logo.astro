@@ -1,0 +1,62 @@
+---
+interface Props {
+	inverse?: boolean;
+}
+const { inverse = false } = Astro.props;
+---
+
+<span class:list={['logo', { inverse }]}>
+	<svg class="logo-mark" viewBox="0 0 40 40" aria-hidden="true">
+		<rect width="40" height="40" rx="11" class="logo-bg"></rect>
+		<rect x="9" y="11" width="4" height="18" rx="2" fill="#c9a94d"></rect>
+		<path
+			d="M30 13H22.5a3.5 3.5 0 0 0 0 7h3a3.5 3.5 0 0 1 0 7H18"
+			fill="none"
+			class="logo-s"
+			stroke-width="4"
+			stroke-linecap="round"
+			stroke-linejoin="round"></path>
+	</svg>
+	<span class="logo-word">Ivan Schmid</span>
+</span>
+
+<style>
+	.logo {
+		display: inline-flex;
+		align-items: center;
+		gap: 12px;
+		color: var(--ink);
+	}
+
+	.logo-mark {
+		width: 36px;
+		height: 36px;
+		flex: none;
+	}
+
+	.logo-bg {
+		fill: #16171a;
+	}
+
+	.logo-s {
+		stroke: #fff;
+	}
+
+	.logo-word {
+		font-weight: 700;
+		font-size: 18px;
+		letter-spacing: -0.02em;
+	}
+
+	.inverse {
+		color: #fff;
+	}
+
+	.inverse .logo-bg {
+		fill: #fff;
+	}
+
+	.inverse .logo-s {
+		stroke: #16171a;
+	}
+</style>

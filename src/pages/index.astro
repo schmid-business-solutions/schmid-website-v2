@@ -5,90 +5,154 @@ import ContactForm from '../components/ContactForm.astro';
 
 <Layout title="Ivan Schmid – Unternehmer">
 	<main>
-		<section class="wrap intro">
-			<img
-				class="portrait"
-				src="/portrait.webp"
-				width="1000"
-				height="1250"
-				alt="Portrait von Ivan Schmid"
-				fetchpriority="high"
-			/>
-			<div class="intro-text">
-				<h1>Ivan Schmid</h1>
-				<p>
-					Ich bin Unternehmer aus Überzeugung. Seit über 25 Jahren baue ich Unternehmen, Produkte und
-					digitale Plattformen auf – unter anderem als Gründer von Payrexx, Hotelcard und Comvation.
-					Heute bin ich Geschäftsführer der Payrexx Europe AG.
+		<section class="hero container">
+			<div class="hero-head">
+				<div>
+					<p class="eyebrow reveal">Unternehmer · Steffisburg</p>
+					<h1 class="reveal reveal-2">Ivan<br />Schmid</h1>
+				</div>
+				<p class="lead reveal reveal-3">
+					Ich bin Unternehmer aus Überzeugung. Seit über 25 Jahren baue ich Unternehmen, Produkte und digitale
+					Plattformen auf – unter anderem als Gründer von Payrexx, Hotelcard und Comvation. Heute bin ich
+					Geschäftsführer der Payrexx Europe AG.
 				</p>
 			</div>
+
+			<figure class="hero-image reveal reveal-3">
+				<img
+					src="/heronew.webp"
+					width="2560"
+					height="1100"
+					alt="Ivan Schmid an seinem Arbeitsplatz mit Blick auf den Thunersee"
+					fetchpriority="high"
+				/>
+			</figure>
 		</section>
 
-		<section class="wrap contact" aria-labelledby="kontakt-titel">
-			<h2 id="kontakt-titel">Kontakt</h2>
-			<ContactForm />
+		<section class="contact" id="kontakt" aria-labelledby="kontakt-titel">
+			<div class="container contact-inner">
+				<div class="contact-head">
+					<p class="eyebrow eyebrow-dark">Kontakt</p>
+					<h2 id="kontakt-titel">Schreiben Sie mir.</h2>
+				</div>
+				<ContactForm />
+			</div>
 		</section>
 	</main>
 </Layout>
 
 <style>
-	.intro {
-		display: grid;
-		grid-template-columns: 180px 1fr;
-		gap: 36px;
-		align-items: center;
-		padding-top: 64px;
-		padding-bottom: 64px;
+	.hero {
+		padding-top: clamp(40px, 7vw, 96px);
+		padding-bottom: clamp(56px, 8vw, 112px);
 	}
 
-	.portrait {
-		width: 100%;
-		height: auto;
-		aspect-ratio: 4 / 5;
-		object-fit: cover;
-		border-radius: var(--radius);
-		background: var(--paper-2);
+	.hero-head {
+		display: grid;
+		grid-template-columns: 1.1fr 1fr;
+		gap: clamp(24px, 5vw, 80px);
+		align-items: end;
+		margin-bottom: clamp(32px, 5vw, 64px);
+	}
+
+	.eyebrow {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		margin: 0 0 20px;
+		font-size: 13px;
+		font-weight: 600;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--muted);
+	}
+
+	.eyebrow::before {
+		content: '';
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		background: var(--gold);
 	}
 
 	h1 {
-		margin: 0 0 12px;
-		font-size: 30px;
-		line-height: 1.2;
-		font-weight: 700;
-		letter-spacing: -0.01em;
+		margin: 0;
+		font-size: clamp(56px, 10vw, 136px);
+		line-height: 0.92;
+		font-weight: 800;
+		letter-spacing: -0.045em;
 	}
 
-	.intro-text p {
+	.lead {
 		margin: 0;
-		color: var(--ink-soft);
+		font-size: clamp(19px, 1.9vw, 24px);
+		line-height: 1.5;
+		font-weight: 500;
+		letter-spacing: -0.01em;
+		color: var(--ink-2);
+		text-wrap: pretty;
+		max-width: 34em;
+	}
+
+	.hero-image {
+		margin: 0;
+		border-radius: clamp(18px, 2.4vw, 32px);
+		overflow: hidden;
+		background: var(--paper-2);
+		aspect-ratio: 2560 / 1100;
+	}
+
+	.hero-image img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: 30% 50%;
 	}
 
 	.contact {
-		padding-bottom: 48px;
+		background: var(--dark);
+		color: #fff;
+	}
+
+	.contact-inner {
+		display: grid;
+		grid-template-columns: 1fr 1.2fr;
+		gap: clamp(32px, 6vw, 96px);
+		padding-top: clamp(64px, 9vw, 128px);
+		padding-bottom: clamp(64px, 9vw, 128px);
+	}
+
+	.eyebrow-dark {
+		color: rgba(255, 255, 255, 0.55);
 	}
 
 	h2 {
-		margin: 0 0 24px;
-		padding-top: 40px;
-		border-top: 1px solid var(--line);
-		font-size: 20px;
-		font-weight: 700;
+		margin: 0;
+		font-size: clamp(36px, 4.2vw, 56px);
+		line-height: 1;
+		font-weight: 800;
+		letter-spacing: -0.035em;
 	}
 
-	@media (max-width: 560px) {
-		.intro {
+	@media (max-width: 860px) {
+		.hero-head,
+		.contact-inner {
 			grid-template-columns: 1fr;
-			gap: 24px;
-			padding-top: 40px;
-			padding-bottom: 48px;
 		}
 
-		.portrait {
-			width: 160px;
+		.hero-image {
+			aspect-ratio: 4 / 3;
 		}
 
-		h1 {
-			font-size: 26px;
+		.hero-image img {
+			object-position: 32% 50%;
+		}
+	}
+
+	@media (max-width: 520px) {
+		.hero-image {
+			aspect-ratio: 1 / 1;
 		}
 	}
 </style>
