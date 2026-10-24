@@ -1,128 +1,239 @@
 ---
-// ContactForm.astro - EmailJS integrated contact form component
+// ContactForm.astro – schlankes Kontaktformular, Versand über EmailJS
 ---
 
-<form id="contact-form" class="grid grid-cols-1 md:grid-cols-2 gap-8" method="POST">
-	<div class="col-span-1 md:col-span-2">
-		<label class="block text-on-surface-variant font-label-lg mb-2">Name</label>
-		<input
-			id="name"
-			class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:border-tertiary-container focus:ring-2 focus:ring-tertiary-container/20 transition-all outline-none"
-			placeholder="Max Müller"
-			type="text"
-			required
-		/>
+<form id="contact-form" class="contact-form" novalidate>
+	<div class="row">
+		<div class="field">
+			<label for="cf-name">Name</label>
+			<input id="cf-name" name="name" type="text" autocomplete="name" required />
+		</div>
+		<div class="field">
+			<label for="cf-email">E-Mail</label>
+			<input id="cf-email" name="email" type="email" autocomplete="email" required />
+		</div>
 	</div>
-	<div class="col-span-1 md:col-span-2">
-		<label class="block text-on-surface-variant font-label-lg mb-2">E-Mail Adresse</label>
-		<input
-			id="email"
-			class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:border-tertiary-container focus:ring-2 focus:ring-tertiary-container/20 transition-all outline-none"
-			placeholder="name@firma.ch"
-			type="email"
-			required
-		/>
+	<div class="field">
+		<label for="cf-message">Nachricht</label>
+		<textarea id="cf-message" name="message" rows="5" required></textarea>
 	</div>
-	<div class="col-span-1 md:col-span-2">
-		<label class="block text-on-surface-variant font-label-lg mb-2">Anfrage</label>
-		<input
-			id="request"
-			class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:border-tertiary-container focus:ring-2 focus:ring-tertiary-container/20 transition-all outline-none"
-			placeholder="Worum geht es?"
-			type="text"
-			required
-		/>
+	<div class="actions">
+		<p class="consent">
+			Ihre Angaben werden nur zur Beantwortung Ihrer Anfrage verwendet. <a href="/datenschutz/">Datenschutz</a>
+		</p>
+		<button id="submit-btn" type="submit"><span class="btn-label">Nachricht senden</span><span class="btn-arrow" aria-hidden="true">→</span></button>
 	</div>
-	<div class="col-span-1 md:col-span-2">
-		<label class="block text-on-surface-variant font-label-lg mb-2">Nachricht</label>
-		<textarea
-			id="message"
-			class="w-full px-4 py-3 rounded-xl border border-outline-variant focus:border-tertiary-container focus:ring-2 focus:ring-tertiary-container/20 transition-all outline-none resize-none"
-			placeholder="Wie kann ich Ihnen helfen?"
-			rows="4"
-			required
-		></textarea>
-	</div>
-	<div class="col-span-1 md:col-span-2 mb-2">
-		<p class="text-label-sm text-on-surface-variant/70 leading-relaxed">Mit dem Absenden des Formulars erklären Sie sich mit der Verarbeitung Ihrer Daten gemäss der Schweizer Datenschutzgesetzgebung einverstanden.</p>
-	</div>
-	<div id="form-status" class="col-span-1 md:col-span-2 hidden rounded-xl px-4 py-3 text-sm font-medium" role="status" aria-live="polite"></div>
-	<div class="col-span-1 md:col-span-2">
-		<button
-			id="submit-btn"
-			class="w-full py-4 bg-tertiary-container text-white rounded-full font-headline-sm hover:brightness-90 hover:shadow-lg transition-all active:scale-95 disabled:opacity-60 disabled:cursor-not-allowed"
-			type="submit"
-		>Anfrage senden</button>
-	</div>
+	<div id="form-status" class="status" role="status" aria-live="polite" hidden></div>
 </form>
+
+<style>
+	.contact-form {
+		display: grid;
+		gap: 36px;
+	}
+
+	.row {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 36px 40px;
+	}
+
+	.field {
+		display: grid;
+		gap: 4px;
+	}
+
+	label {
+		font-size: 10.5px;
+		font-weight: 600;
+		letter-spacing: 0.3em;
+		text-transform: uppercase;
+		color: rgba(255, 255, 255, 0.5);
+	}
+
+	input,
+	textarea {
+		width: 100%;
+		font-family: var(--serif);
+		font-size: 22px;
+		font-weight: 400;
+		color: #fff;
+		background: transparent;
+		border: 0;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+		border-radius: 0;
+		padding: 10px 0 12px;
+		transition: border-color 0.4s var(--ease);
+	}
+
+	textarea {
+		resize: vertical;
+		min-height: 120px;
+		line-height: 1.4;
+	}
+
+	input:hover,
+	textarea:hover {
+		border-bottom-color: rgba(255, 255, 255, 0.4);
+	}
+
+	input:focus,
+	textarea:focus {
+		outline: none;
+		border-bottom-color: var(--gold-light);
+	}
+
+	.actions {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 28px;
+		margin-top: 8px;
+	}
+
+	.consent {
+		margin: 0;
+		max-width: 24em;
+		font-size: 13px;
+		line-height: 1.6;
+		color: rgba(255, 255, 255, 0.42);
+	}
+
+	.consent a {
+		color: rgba(255, 255, 255, 0.7);
+		text-underline-offset: 3px;
+	}
+
+	button {
+		flex: none;
+		display: inline-flex;
+		align-items: center;
+		gap: 18px;
+		font-family: var(--sans);
+		font-size: 11px;
+		font-weight: 600;
+		letter-spacing: 0.32em;
+		text-transform: uppercase;
+		color: var(--gold-light);
+		background: transparent;
+		border: 1px solid rgba(201, 172, 116, 0.55);
+		border-radius: 0;
+		padding: 20px 30px 20px 34px;
+		cursor: pointer;
+		transition: background 0.4s var(--ease), color 0.4s var(--ease), border-color 0.4s var(--ease);
+	}
+
+	.btn-arrow {
+		font-size: 15px;
+		letter-spacing: 0;
+		transition: transform 0.4s var(--ease);
+	}
+
+	button:hover {
+		background: var(--gold-light);
+		border-color: var(--gold-light);
+		color: var(--dark);
+	}
+
+	button:hover .btn-arrow {
+		transform: translateX(4px);
+	}
+
+	button:disabled {
+		opacity: 0.6;
+		cursor: default;
+	}
+
+	.status {
+		font-size: 15px;
+		line-height: 1.6;
+		padding: 16px 0 0;
+		border-top: 1px solid var(--dark-line);
+	}
+
+	.status[data-kind='success'] {
+		color: var(--gold-light);
+	}
+
+	.status[data-kind='error'] {
+		color: #e8b4ab;
+	}
+
+	@media (max-width: 600px) {
+		.row {
+			grid-template-columns: 1fr;
+		}
+
+		.actions {
+			flex-direction: column-reverse;
+			align-items: stretch;
+		}
+
+		button {
+			justify-content: space-between;
+		}
+	}
+</style>
 
 <script is:inline src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4.4.1/dist/email.min.js"></script>
 <script is:inline>
-	emailjs.init({
-		publicKey: 'FQeBWdwkjiwk9aYxl'
-	});
+	(function () {
+		var form = document.getElementById('contact-form');
+		var btn = document.getElementById('submit-btn');
+		var statusBox = document.getElementById('form-status');
+		var label = btn.querySelector('.btn-label');
+		if (!form) return;
 
-	const form = document.getElementById('contact-form');
-	const submitBtn = document.getElementById('submit-btn');
-	const statusBox = document.getElementById('form-status');
-
-	function showStatus(kind, text) {
-		if (!statusBox) return;
-		statusBox.textContent = text;
-		statusBox.classList.remove('hidden');
-		if (kind === 'success') {
-			statusBox.style.backgroundColor = '#ecfdf5';
-			statusBox.style.color = '#065f46';
-			statusBox.style.border = '1px solid #a7f3d0';
-		} else {
-			statusBox.style.backgroundColor = '#fef2f2';
-			statusBox.style.color = '#991b1b';
-			statusBox.style.border = '1px solid #fecaca';
-		}
-	}
-
-	function hideStatus() {
-		if (!statusBox) return;
-		statusBox.classList.add('hidden');
-		statusBox.textContent = '';
-	}
-
-	form?.addEventListener('submit', async (e) => {
-		e.preventDefault();
-		hideStatus();
-
-		if (submitBtn) {
-			submitBtn.disabled = true;
-			submitBtn.textContent = 'Wird gesendet...';
+		if (window.emailjs) {
+			emailjs.init({ publicKey: 'FQeBWdwkjiwk9aYxl' });
 		}
 
-		const templateParams = {
-			to_email: 'schmidmobile@gmail.com',
-			from_name: document.getElementById('name')?.value,
-			from_email: document.getElementById('email')?.value,
-			request: document.getElementById('request')?.value,
-			message: document.getElementById('message')?.value,
-			subject: 'Website Anfrage von ivanschmid.com'
-		};
+		function showStatus(kind, text) {
+			statusBox.textContent = text;
+			statusBox.dataset.kind = kind;
+			statusBox.hidden = false;
+		}
 
-		try {
-			await emailjs.send('service_mtfmush', 'template_ws51hqc', templateParams);
+		form.addEventListener('submit', function (e) {
+			e.preventDefault();
+			statusBox.hidden = true;
 
-			showStatus('success', 'Vielen Dank! Ihre Anfrage wurde erfolgreich versendet. Wir melden uns in Kürze bei Ihnen.');
-			form.reset();
-
-			if (submitBtn) {
-				submitBtn.disabled = false;
-				submitBtn.textContent = 'Anfrage senden';
+			if (!form.checkValidity()) {
+				form.reportValidity();
+				return;
 			}
-		} catch (error) {
-			console.error('Failed to send email:', error);
-			showStatus('error', 'Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut oder schreiben Sie direkt an office@ivanschmid.com.');
 
-			if (submitBtn) {
-				submitBtn.disabled = false;
-				submitBtn.textContent = 'Anfrage senden';
+			if (!window.emailjs) {
+				showStatus('error', 'Das Formular ist gerade nicht verfügbar. Bitte schreiben Sie direkt an office@ivanschmid.com.');
+				return;
 			}
-		}
-	});
+
+			btn.disabled = true;
+			label.textContent = 'Wird gesendet …';
+
+			var params = {
+				to_email: 'schmidmobile@gmail.com',
+				from_name: form.name.value.trim(),
+				from_email: form.email.value.trim(),
+				request: 'Kontaktformular ivanschmid.com',
+				message: form.message.value.trim(),
+				subject: 'Website Anfrage von ivanschmid.com'
+			};
+
+			emailjs
+				.send('service_mtfmush', 'template_ws51hqc', params)
+				.then(function () {
+					showStatus('success', 'Vielen Dank für Ihre Nachricht. Ich melde mich zeitnah persönlich bei Ihnen.');
+					form.reset();
+				})
+				.catch(function (err) {
+					console.error('EmailJS:', err);
+					showStatus('error', 'Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es später erneut oder schreiben Sie direkt an office@ivanschmid.com.');
+				})
+				.finally(function () {
+					btn.disabled = false;
+					label.textContent = 'Nachricht senden';
+				});
+		});
+	})();
 </script>
