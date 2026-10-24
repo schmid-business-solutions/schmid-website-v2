@@ -11,10 +11,17 @@ import ContactForm from '../components/ContactForm.astro';
 					<p class="eyebrow reveal">Unternehmer · Steffisburg</p>
 					<h1 class="reveal reveal-2">Ivan<br />Schmid</h1>
 				</div>
-				<p class="lead reveal reveal-3">
-					Ich bin Unternehmer aus Überzeugung. Seit über 25 Jahren baue ich Unternehmen, Produkte und digitale
-					Plattformen auf – unter anderem als Gründer von Payrexx, Hotelcard und Comvation.
-				</p>
+				<div class="intro reveal reveal-3">
+					<p class="lead">
+						Ich bin Unternehmer aus Überzeugung. Seit über 25 Jahren baue ich Unternehmen, Produkte und digitale
+						Plattformen auf – unter anderem als Gründer von Payrexx, Hotelcard und Comvation.
+					</p>
+					<a class="partner" href="https://www.payrexx.com/?ref=s32026" target="_blank" rel="noopener">
+						<span class="partner-label">Offizieller</span>
+						<strong>Payrexx Solution Partner</strong>
+						<span class="partner-arrow" aria-hidden="true">↗</span>
+					</a>
+				</div>
 			</div>
 
 			<figure class="hero-image reveal reveal-3">
@@ -91,6 +98,50 @@ import ContactForm from '../components/ContactForm.astro';
 		color: var(--ink-2);
 		text-wrap: pretty;
 		max-width: 34em;
+	}
+
+	.partner {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		margin-top: 28px;
+		padding: 10px 14px 10px 18px;
+		border: 1px solid var(--line);
+		border-radius: 999px;
+		font-size: 15px;
+		text-decoration: none;
+		color: var(--ink);
+		transition: background 0.2s, border-color 0.2s;
+	}
+
+	.partner-label {
+		color: var(--muted);
+	}
+
+	.partner strong {
+		font-weight: 700;
+	}
+
+	.partner-arrow {
+		display: grid;
+		place-items: center;
+		width: 26px;
+		height: 26px;
+		margin-left: 4px;
+		border-radius: 50%;
+		background: var(--gold);
+		color: var(--ink);
+		font-size: 13px;
+		transition: transform 0.2s;
+	}
+
+	.partner:hover {
+		background: var(--paper-2);
+		border-color: var(--paper-2);
+	}
+
+	.partner:hover .partner-arrow {
+		transform: translate(2px, -2px);
 	}
 
 	.hero-image {
