@@ -6,18 +6,9 @@ const { inverse = false } = Astro.props;
 ---
 
 <span class:list={['logo', { inverse }]}>
-	<svg class="logo-mark" viewBox="0 0 40 40" aria-hidden="true">
-		<rect width="40" height="40" rx="11" class="logo-bg"></rect>
-		<rect x="9" y="11" width="4" height="18" rx="2" fill="#c9a94d"></rect>
-		<path
-			d="M30 13H22.5a3.5 3.5 0 0 0 0 7h3a3.5 3.5 0 0 1 0 7H18"
-			fill="none"
-			class="logo-s"
-			stroke-width="4"
-			stroke-linecap="round"
-			stroke-linejoin="round"></path>
-	</svg>
-	<span class="logo-word">Ivan Schmid</span>
+	<span class="logo-name">Schmid</span>
+	<span class="logo-rule" aria-hidden="true"></span>
+	<span class="logo-sub">Business Solutions</span>
 </span>
 
 <style>
@@ -26,37 +17,47 @@ const { inverse = false } = Astro.props;
 		align-items: center;
 		gap: 12px;
 		color: var(--ink);
+		line-height: 1;
+		white-space: nowrap;
 	}
 
-	.logo-mark {
-		width: 36px;
-		height: 36px;
-		flex: none;
+	.logo-name {
+		font-weight: 800;
+		font-size: 21px;
+		letter-spacing: -0.03em;
 	}
 
-	.logo-bg {
-		fill: #16171a;
+	.logo-rule {
+		width: 2px;
+		height: 20px;
+		border-radius: 2px;
+		background: var(--gold);
 	}
 
-	.logo-s {
-		stroke: #fff;
-	}
-
-	.logo-word {
-		font-weight: 700;
-		font-size: 18px;
-		letter-spacing: -0.02em;
+	.logo-sub {
+		font-weight: 500;
+		font-size: 16px;
+		letter-spacing: -0.01em;
+		color: var(--muted);
 	}
 
 	.inverse {
 		color: #fff;
 	}
 
-	.inverse .logo-bg {
-		fill: #fff;
+	.inverse .logo-sub {
+		color: rgba(255, 255, 255, 0.6);
 	}
 
-	.inverse .logo-s {
-		stroke: #16171a;
+	@media (max-width: 380px) {
+		.logo {
+			gap: 9px;
+		}
+		.logo-name {
+			font-size: 19px;
+		}
+		.logo-sub {
+			font-size: 14px;
+		}
 	}
 </style>

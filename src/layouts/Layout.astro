@@ -145,6 +145,13 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 		border-color: var(--paper-2);
 	}
 
+	@media (max-width: 420px) {
+		.header-cta {
+			padding: 8px 14px;
+			font-size: 14px;
+		}
+	}
+
 	.site-footer {
 		background: var(--dark);
 		color: rgba(255, 255, 255, 0.55);
