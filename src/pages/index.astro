@@ -6,9 +6,12 @@ import ContactForm from '../components/ContactForm.astro';
 <Layout title="Ivan Schmid – Unternehmer">
 	<main>
 		<section class="hero container">
-			<p class="caps eyebrow reveal">Unternehmer · Steffisburg</p>
-			<h1 class="reveal reveal-2">Ivan Schmid</h1>
-			<span class="rule reveal reveal-3" aria-hidden="true"></span>
+			<h1 class="reveal">Ivan <em>Schmid</em></h1>
+			<div class="hero-meta reveal reveal-2">
+				<span class="caps">Unternehmer</span>
+				<span class="meta-line" aria-hidden="true"></span>
+				<span class="caps">Steffisburg · Schweiz</span>
+			</div>
 		</section>
 
 		<figure class="hero-image reveal-img">
@@ -22,63 +25,112 @@ import ContactForm from '../components/ContactForm.astro';
 		</figure>
 
 		<section class="intro container">
-			<p class="lead">
-				Ich bin Unternehmer aus Überzeugung. Seit über 25 Jahren baue ich Unternehmen, Produkte und digitale
-				Plattformen auf – unter anderem als Gründer von Payrexx, Hotelcard, Comvation und 1Daily.
+			<p class="caps label in-view">
+				<span class="label-num">01</span>
+				<span class="label-rule" aria-hidden="true"></span>
+				Über mich
 			</p>
-			<a class="partner" href="https://www.payrexx.com/?ref=s32026" target="_blank" rel="noopener">
-				<span class="partner-rule" aria-hidden="true"></span>
-				<span class="caps">Offizieller Payrexx Solution Partner</span>
-				<span class="partner-arrow" aria-hidden="true">↗</span>
-			</a>
+			<div class="intro-body">
+				<p class="lead in-view">
+					Ich bin Unternehmer aus Überzeugung. Seit über 25 Jahren baue ich Unternehmen, Produkte und digitale
+					Plattformen auf – unter anderem als Gründer von Payrexx, Hotelcard, Comvation und 1Daily.
+				</p>
+				<a class="partner in-view" href="https://www.payrexx.com/?ref=s32026" target="_blank" rel="noopener">
+					<span class="caps">Offizieller Payrexx Solution Partner</span>
+					<span class="partner-arrow" aria-hidden="true">↗</span>
+				</a>
+			</div>
 		</section>
 
 		<section class="contact" id="kontakt" aria-labelledby="kontakt-titel">
 			<div class="container contact-inner">
 				<div class="contact-head">
-					<p class="caps contact-eyebrow">Kontakt</p>
-					<h2 id="kontakt-titel">Ich freue mich<br /><em>auf Ihre Nachricht.</em></h2>
+					<p class="caps label label-dark in-view">
+						<span class="label-num">02</span>
+						<span class="label-rule" aria-hidden="true"></span>
+						Kontakt
+					</p>
+					<h2 id="kontakt-titel" class="in-view">Ich freue mich <em>auf Ihre Nachricht.</em></h2>
 				</div>
-				<ContactForm />
+				<div class="in-view">
+					<ContactForm />
+				</div>
 			</div>
 		</section>
 	</main>
 </Layout>
 
 <style>
+	/* ---------- Hero ---------- */
 	.hero {
-		text-align: center;
-		padding-top: clamp(64px, 10vw, 136px);
-		padding-bottom: clamp(48px, 7vw, 96px);
-	}
-
-	.eyebrow {
-		margin: 0 0 clamp(20px, 3vw, 32px);
-		color: var(--gold);
+		padding-top: clamp(56px, 9vw, 128px);
+		padding-bottom: clamp(36px, 5vw, 64px);
 	}
 
 	h1 {
 		margin: 0;
 		font-family: var(--serif);
 		font-weight: 300;
-		font-size: clamp(60px, 11vw, 168px);
-		line-height: 0.95;
-		letter-spacing: -0.015em;
+		font-size: clamp(72px, 16vw, 240px);
+		line-height: 0.88;
+		letter-spacing: -0.035em;
+		margin-left: -0.04em;
 	}
 
-	.rule {
-		display: block;
-		width: 1px;
-		height: clamp(40px, 6vw, 72px);
-		margin: clamp(32px, 4vw, 48px) auto 0;
+	h1 em {
+		font-style: italic;
+		color: var(--gold);
+	}
+
+	.hero-meta {
+		display: flex;
+		align-items: center;
+		gap: 24px;
+		margin-top: clamp(28px, 4vw, 48px);
+		color: var(--ink-2);
+	}
+
+	.meta-line {
+		flex: 1;
+		height: 1px;
+		background: var(--line);
+		position: relative;
+		overflow: hidden;
+	}
+
+	.meta-line::after {
+		content: '';
+		position: absolute;
+		inset: 0;
 		background: var(--gold);
+		transform-origin: left;
+		transform: scaleX(0);
 	}
 
+	@media (prefers-reduced-motion: no-preference) {
+		.meta-line::after {
+			animation: draw 1.8s 0.6s var(--ease) forwards;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.meta-line::after {
+			transform: scaleX(1);
+		}
+	}
+
+	@keyframes draw {
+		to {
+			transform: scaleX(1);
+		}
+	}
+
+	/* ---------- Bild ---------- */
 	.hero-image {
 		margin: 0;
 		overflow: hidden;
 		aspect-ratio: 2560 / 1040;
-		max-height: 82vh;
+		max-height: 84vh;
 		width: 100%;
 		background: var(--paper-2);
 	}
@@ -93,59 +145,120 @@ import ContactForm from '../components/ContactForm.astro';
 		transform-origin: 0 0;
 	}
 
+	@supports (animation-timeline: view()) {
+		@media (prefers-reduced-motion: no-preference) and (min-width: 861px) {
+			.hero-image img {
+				height: 108%;
+				animation: settle 2.4s var(--ease) both, parallax linear both;
+				animation-timeline: auto, view();
+				animation-range: normal, cover 0% cover 100%;
+			}
+			@keyframes parallax {
+				from {
+					translate: 0 0;
+				}
+				to {
+					translate: 0 -7%;
+				}
+			}
+		}
+	}
+
+	/* ---------- Labels ---------- */
+	.label {
+		display: flex;
+		align-items: center;
+		gap: 14px;
+		margin: 0;
+		color: var(--ink-2);
+	}
+
+	.label-num {
+		color: var(--gold);
+	}
+
+	.label-rule {
+		width: 36px;
+		height: 1px;
+		background: var(--gold);
+	}
+
+	.label-dark {
+		color: rgba(255, 255, 255, 0.6);
+	}
+
+	.label-dark .label-num,
+	.label-dark .label-rule {
+		color: var(--gold-light);
+		background-color: transparent;
+	}
+
+	.label-dark .label-rule {
+		background: var(--gold-light);
+	}
+
+	/* ---------- Intro ---------- */
 	.intro {
-		max-width: 920px;
-		text-align: center;
-		padding-top: clamp(72px, 10vw, 144px);
-		padding-bottom: clamp(80px, 11vw, 160px);
+		display: grid;
+		grid-template-columns: minmax(180px, 1fr) 2.4fr;
+		gap: clamp(24px, 5vw, 80px);
+		padding-top: clamp(80px, 11vw, 168px);
+		padding-bottom: clamp(88px, 12vw, 176px);
+	}
+
+	.intro .label {
+		align-self: start;
+		padding-top: 0.9em;
 	}
 
 	.lead {
 		margin: 0;
 		font-family: var(--serif);
-		font-weight: 400;
-		font-size: clamp(26px, 3.1vw, 40px);
-		line-height: 1.35;
+		font-weight: 300;
+		font-size: clamp(28px, 3.6vw, 52px);
+		line-height: 1.22;
+		letter-spacing: -0.01em;
 		color: var(--ink);
-		text-wrap: balance;
+		text-wrap: pretty;
 		font-variant-numeric: lining-nums;
 	}
 
 	.partner {
 		display: inline-flex;
 		align-items: center;
-		gap: 16px;
+		gap: 18px;
 		margin-top: clamp(40px, 5vw, 64px);
+		padding: 18px 0;
+		border-top: 1px solid var(--line);
+		border-bottom: 1px solid var(--line);
 		text-decoration: none;
 		color: var(--ink-2);
-		transition: color 0.4s var(--ease);
-	}
-
-	.partner-rule {
-		width: 40px;
-		height: 1px;
-		background: var(--gold);
-		transition: width 0.5s var(--ease);
+		transition: color 0.4s var(--ease), gap 0.5s var(--ease);
 	}
 
 	.partner-arrow {
+		display: grid;
+		place-items: center;
+		width: 34px;
+		height: 34px;
+		border: 1px solid var(--gold);
+		border-radius: 50%;
 		color: var(--gold);
-		font-size: 14px;
-		transition: transform 0.4s var(--ease);
+		font-size: 13px;
+		transition: background 0.4s var(--ease), color 0.4s var(--ease);
 	}
 
 	.partner:hover {
 		color: var(--ink);
-	}
-
-	.partner:hover .partner-rule {
-		width: 64px;
+		gap: 26px;
 	}
 
 	.partner:hover .partner-arrow {
-		transform: translate(2px, -2px);
+		background: var(--gold);
+		color: var(--paper);
 	}
 
+	/* ---------- Kontakt ---------- */
 	.contact {
 		background: var(--dark);
 		color: #fff;
@@ -159,28 +272,34 @@ import ContactForm from '../components/ContactForm.astro';
 		padding-bottom: clamp(88px, 11vw, 160px);
 	}
 
-	.contact-eyebrow {
-		margin: 0 0 28px;
-		color: var(--gold-light);
+	.contact-head .label {
+		margin-bottom: 32px;
 	}
 
 	h2 {
 		margin: 0;
 		font-family: var(--serif);
 		font-weight: 300;
-		font-size: clamp(42px, 4.6vw, 68px);
-		line-height: 1.05;
-		letter-spacing: -0.01em;
+		font-size: clamp(44px, 4.6vw, 68px);
+		line-height: 1;
+		letter-spacing: -0.02em;
 	}
 
 	h2 em {
+		display: block;
 		font-style: italic;
 		color: var(--gold-light);
 	}
 
+	/* ---------- Responsive ---------- */
 	@media (max-width: 860px) {
+		.intro,
 		.contact-inner {
 			grid-template-columns: 1fr;
+		}
+
+		.intro .label {
+			padding-top: 0;
 		}
 
 		.hero-image {
@@ -189,22 +308,22 @@ import ContactForm from '../components/ContactForm.astro';
 	}
 
 	@media (max-width: 520px) {
-
-		.lead {
-			text-wrap: pretty;
-		}
-
-		.partner {
-			flex-direction: column;
+		.hero-meta {
 			gap: 14px;
 		}
 
-		.partner .caps {
-			letter-spacing: 0.22em;
+		.hero-meta .caps {
+			font-size: 10px;
+			letter-spacing: 0.24em;
 		}
 
-		.partner-arrow {
-			display: none;
+		.partner {
+			display: flex;
+			justify-content: space-between;
+		}
+
+		.partner .caps {
+			letter-spacing: 0.2em;
 		}
 	}
 </style>
