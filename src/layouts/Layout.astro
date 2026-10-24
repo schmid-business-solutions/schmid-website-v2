@@ -55,8 +55,29 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 
 		<footer class="site-footer">
 			<div class="container">
+				<div class="footer-grid">
+					<div class="footer-col">
+						<p class="footer-name">Schmid Business Solutions</p>
+						<address>
+							Hardeggweg 2<br />
+							3612 Steffisburg<br />
+							Schweiz
+						</address>
+					</div>
+					<div class="footer-col">
+						<p class="footer-label">Kontakt</p>
+						<p>
+							<a href="tel:+41796225329">+41 79 622 53 29</a><br />
+							<a href="mailto:office@ivanschmid.com">office@ivanschmid.com</a>
+						</p>
+					</div>
+					<div class="footer-col">
+						<p class="footer-label">UID</p>
+						<p>CHE-199.237.913</p>
+					</div>
+				</div>
 				<div class="footer-inner">
-					<span>© {new Date().getFullYear()} Schmid Business Solutions · Steffisburg</span>
+					<span>© {new Date().getFullYear()} Schmid Business Solutions</span>
 					<nav aria-label="Rechtliches">
 						<a href="/impressum/">Impressum</a>
 						<a href="/datenschutz/">Datenschutz</a>
@@ -173,7 +194,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 	}
 
 	.site-header.is-scrolled {
-		background: rgba(250, 248, 244, 0.86);
+		background: rgba(250, 248, 244, 0.95);
 		backdrop-filter: blur(18px) saturate(140%);
 		-webkit-backdrop-filter: blur(18px) saturate(140%);
 	}
@@ -239,11 +260,43 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 
 	.site-footer {
 		background: var(--dark);
-		color: rgba(255, 255, 255, 0.45);
-		font-size: 11px;
-		font-weight: 500;
-		letter-spacing: 0.18em;
+		color: rgba(255, 255, 255, 0.62);
+		font-size: 15px;
+		line-height: 1.75;
+	}
+
+	.footer-grid {
+		display: grid;
+		grid-template-columns: 1.4fr 1fr 1fr;
+		gap: 32px 48px;
+		padding-top: clamp(48px, 6vw, 72px);
+		padding-bottom: clamp(40px, 5vw, 56px);
+		border-top: 1px solid var(--dark-line);
+	}
+
+	.footer-col p,
+	.footer-col address {
+		margin: 0;
+		font-style: normal;
+	}
+
+	.footer-name {
+		font-family: var(--serif);
+		font-size: 24px;
+		font-weight: 400;
+		line-height: 1.2;
+		color: #fff;
+		margin-bottom: 12px !important;
+	}
+
+	.footer-label {
+		font-size: 10.5px;
+		font-weight: 600;
+		letter-spacing: 0.3em;
 		text-transform: uppercase;
+		color: var(--gold-light);
+		margin-bottom: 14px !important;
+		padding-top: 8px;
 	}
 
 	.footer-inner {
@@ -251,9 +304,14 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 		flex-wrap: wrap;
 		gap: 14px 32px;
 		justify-content: space-between;
-		padding-top: 32px;
-		padding-bottom: 36px;
+		padding-top: 24px;
+		padding-bottom: 32px;
 		border-top: 1px solid var(--dark-line);
+		font-size: 11px;
+		font-weight: 500;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		color: rgba(255, 255, 255, 0.4);
 	}
 
 	.site-footer nav {
@@ -268,6 +326,16 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 
 	.site-footer a:hover {
 		color: var(--gold-light);
+	}
+
+	@media (max-width: 760px) {
+		.footer-grid {
+			grid-template-columns: 1fr 1fr;
+		}
+
+		.footer-grid .footer-col:first-child {
+			grid-column: 1 / -1;
+		}
 	}
 
 	@media (prefers-reduced-motion: no-preference) {
