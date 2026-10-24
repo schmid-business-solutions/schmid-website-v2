@@ -6,9 +6,9 @@ import ContactForm from '../components/ContactForm.astro';
 <Layout title="Ivan Schmid – Unternehmer">
 	<main>
 		<section class="hero container">
-			<h1 class="reveal">Ivan <em>Schmid</em></h1>
+			<h1 class="reveal">Aus Ideen <em>werden Unternehmen.</em></h1>
 			<div class="hero-meta reveal reveal-2">
-				<span class="caps">Unternehmer</span>
+				<span class="caps">Ivan Schmid · Unternehmer</span>
 				<span class="meta-line" aria-hidden="true"></span>
 				<span class="caps">Steffisburg · Schweiz</span>
 			</div>
@@ -71,13 +71,16 @@ import ContactForm from '../components/ContactForm.astro';
 		margin: 0;
 		font-family: var(--serif);
 		font-weight: 300;
-		font-size: clamp(72px, 16vw, 240px);
-		line-height: 0.88;
-		letter-spacing: -0.035em;
-		margin-left: -0.04em;
+		font-size: clamp(46px, 7.2vw, 112px);
+		line-height: 1;
+		letter-spacing: -0.025em;
+		margin-left: -0.03em;
+		max-width: 12em;
+		text-wrap: balance;
 	}
 
 	h1 em {
+		display: block;
 		font-style: italic;
 		color: var(--gold);
 	}
@@ -315,6 +318,10 @@ import ContactForm from '../components/ContactForm.astro';
 		.hero-meta .caps {
 			font-size: 10px;
 			letter-spacing: 0.24em;
+		}
+
+		.hero-meta .caps:last-child {
+			display: none;
 		}
 
 		.partner {
