@@ -1,5 +1,9 @@
 ---
 import '@fontsource-variable/manrope';
+import '@fontsource/cormorant-garamond/300.css';
+import '@fontsource/cormorant-garamond/400.css';
+import '@fontsource/cormorant-garamond/500.css';
+import '@fontsource/cormorant-garamond/300-italic.css';
 import Logo from '../components/Logo.astro';
 
 interface Props {
@@ -24,7 +28,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		<meta name="author" content="Ivan Schmid" />
-		<meta name="theme-color" content="#ffffff" />
+		<meta name="theme-color" content="#faf8f4" />
 		{noindex && <meta name="robots" content="noindex" />}
 		<link rel="canonical" href={canonical} />
 		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -39,41 +43,48 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 	</head>
 	<body>
 		<header class="site-header">
-			<div class="container header-inner">
-				<a href="/" aria-label="Ivan Schmid – Startseite"><Logo /></a>
-				<a class="header-cta" href="/#kontakt">Kontakt</a>
+			<div class="container">
+				<div class="header-inner">
+					<a href="/" aria-label="Schmid Business Solutions – Startseite"><Logo /></a>
+					<a class="header-link" href="/#kontakt">Kontakt</a>
+				</div>
 			</div>
 		</header>
 
 		<slot />
 
 		<footer class="site-footer">
-			<div class="container"><div class="footer-inner">
-				<span>© {new Date().getFullYear()} Schmid Business Solutions, Steffisburg</span>
-				<nav aria-label="Rechtliches">
-					<a href="/impressum/">Impressum</a>
-					<a href="/datenschutz/">Datenschutz</a>
-				</nav>
-			</div></div>
+			<div class="container">
+				<div class="footer-inner">
+					<span>© {new Date().getFullYear()} Schmid Business Solutions · Steffisburg</span>
+					<nav aria-label="Rechtliches">
+						<a href="/impressum/">Impressum</a>
+						<a href="/datenschutz/">Datenschutz</a>
+					</nav>
+				</div>
+			</div>
 		</footer>
 	</body>
 </html>
 
 <style is:global>
 	:root {
-		--ink: #16171a;
-		--ink-2: #3d4046;
-		--muted: #6b6f76;
-		--line: #e7e5e0;
-		--paper: #ffffff;
-		--paper-2: #f5f4f1;
-		--gold: #c9a94d;
-		--gold-dark: #9a7f2e;
-		--dark: #16171a;
-		--dark-2: #222328;
-		--dark-line: rgba(255, 255, 255, 0.14);
-		--container: 1200px;
-		--gutter: clamp(20px, 4vw, 48px);
+		--ink: #1b1a18;
+		--ink-2: #3f3c37;
+		--muted: #7c776e;
+		--line: #e4dfd4;
+		--paper: #faf8f4;
+		--paper-2: #f2eee6;
+		--gold: #a8874a;
+		--gold-light: #c9ac74;
+		--dark: #141311;
+		--dark-2: #1d1c19;
+		--dark-line: rgba(255, 255, 255, 0.12);
+		--serif: 'Cormorant Garamond', 'Times New Roman', serif;
+		--sans: 'Manrope Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+		--container: 1240px;
+		--gutter: clamp(20px, 5vw, 64px);
+		--ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 		color-scheme: light;
 	}
 
@@ -92,15 +103,20 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 		margin: 0;
 		background: var(--paper);
 		color: var(--ink);
-		font-family: 'Manrope Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
-		font-size: 17px;
-		line-height: 1.6;
+		font-family: var(--sans);
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 1.7;
 		-webkit-font-smoothing: antialiased;
 		overflow-x: hidden;
 	}
 
 	a {
 		color: inherit;
+	}
+
+	::selection {
+		background: rgba(168, 135, 74, 0.25);
 	}
 
 	.container {
@@ -110,97 +126,132 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 		padding: 0 var(--gutter);
 	}
 
+	.caps {
+		font-family: var(--sans);
+		font-size: 11px;
+		font-weight: 600;
+		letter-spacing: 0.32em;
+		text-transform: uppercase;
+	}
+
 	.site-header {
 		position: sticky;
 		top: 0;
 		z-index: 20;
-		background: rgba(255, 255, 255, 0.82);
-		backdrop-filter: saturate(160%) blur(14px);
-		-webkit-backdrop-filter: saturate(160%) blur(14px);
-		border-bottom: 1px solid transparent;
+		background: rgba(250, 248, 244, 0.88);
+		backdrop-filter: blur(16px);
+		-webkit-backdrop-filter: blur(16px);
 	}
 
 	.header-inner {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		height: 76px;
+		height: 88px;
+		border-bottom: 1px solid var(--line);
 	}
 
 	.site-header a {
 		text-decoration: none;
 	}
 
-	.header-cta {
-		font-size: 15px;
+	.header-link {
+		position: relative;
+		font-size: 11px;
 		font-weight: 600;
-		padding: 10px 20px;
-		border-radius: 999px;
-		border: 1px solid var(--line);
-		transition: background 0.2s, border-color 0.2s;
+		letter-spacing: 0.32em;
+		text-transform: uppercase;
+		padding: 6px 0;
 	}
 
-	.header-cta:hover {
-		background: var(--paper-2);
-		border-color: var(--paper-2);
+	.header-link::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		right: 0.32em;
+		bottom: 0;
+		height: 1px;
+		background: var(--gold);
+		transform: scaleX(0.35);
+		transform-origin: left;
+		transition: transform 0.5s var(--ease);
 	}
 
-	@media (max-width: 420px) {
-		.header-cta {
-			padding: 8px 14px;
-			font-size: 14px;
-		}
+	.header-link:hover::after {
+		transform: scaleX(1);
 	}
 
 	.site-footer {
 		background: var(--dark);
-		color: rgba(255, 255, 255, 0.55);
-		font-size: 14px;
+		color: rgba(255, 255, 255, 0.45);
+		font-size: 11px;
+		font-weight: 500;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
 	}
 
 	.footer-inner {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 12px 28px;
+		gap: 14px 32px;
 		justify-content: space-between;
-		padding-top: 28px;
-		padding-bottom: 32px;
+		padding-top: 32px;
+		padding-bottom: 36px;
 		border-top: 1px solid var(--dark-line);
 	}
 
 	.site-footer nav {
 		display: flex;
-		gap: 24px;
+		gap: 28px;
 	}
 
 	.site-footer a {
 		text-decoration: none;
-		transition: color 0.2s;
+		transition: color 0.3s;
 	}
 
 	.site-footer a:hover {
-		color: #fff;
+		color: var(--gold-light);
 	}
 
 	@media (prefers-reduced-motion: no-preference) {
 		.reveal {
-			animation: reveal 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+			animation: reveal 1.4s var(--ease) both;
 		}
 		.reveal-2 {
-			animation-delay: 0.12s;
+			animation-delay: 0.15s;
 		}
 		.reveal-3 {
-			animation-delay: 0.24s;
+			animation-delay: 0.3s;
+		}
+		.reveal-img img {
+			animation: settle 2.4s var(--ease) both;
 		}
 		@keyframes reveal {
 			from {
 				opacity: 0;
-				transform: translateY(18px);
+				transform: translateY(14px);
 			}
 			to {
 				opacity: 1;
 				transform: none;
 			}
+		}
+		@keyframes settle {
+			from {
+				opacity: 0;
+				transform: scale(1.04);
+			}
+			to {
+				opacity: 1;
+				transform: none;
+			}
+		}
+	}
+
+	@media (max-width: 560px) {
+		.header-inner {
+			height: 72px;
 		}
 	}
 </style>

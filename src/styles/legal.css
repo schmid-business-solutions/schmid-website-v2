@@ -1,8 +1,7 @@
-.legal { max-width: 760px; margin: 0 auto; padding: clamp(40px, 6vw, 80px) var(--gutter) clamp(56px, 8vw, 104px); }
-.legal .back { font-size: 14px; font-weight: 600; text-decoration: none; color: var(--muted); }
-.legal .back:hover { color: var(--ink); }
-.legal h1 { font-size: clamp(36px, 5vw, 56px); line-height: 1; letter-spacing: -0.035em; margin: 24px 0 12px; font-weight: 800; }
-.legal .stand { color: var(--muted); font-size: 14px; margin: 0 0 40px; }
-.legal h2 { font-size: 18px; font-weight: 700; letter-spacing: -0.01em; margin: 36px 0 8px; }
+.legal { max-width: 760px; margin: 0 auto; padding: clamp(56px, 8vw, 112px) var(--gutter) clamp(72px, 10vw, 136px); }
+.legal .back { font-size: 11px; font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase; text-decoration: none; color: var(--gold); }
+.legal h1 { font-family: var(--serif); font-weight: 300; font-size: clamp(48px, 6vw, 80px); line-height: 1; letter-spacing: -0.01em; margin: 28px 0 16px; }
+.legal .stand { color: var(--muted); font-size: 14px; margin: 0 0 48px; }
+.legal h2 { font-family: var(--serif); font-size: 26px; font-weight: 500; margin: 44px 0 10px; }
 .legal p, .legal ul, .legal address { margin: 0 0 12px; color: var(--ink-2); font-size: 16px; font-style: normal; }
-.legal a { color: var(--gold-dark); }
+.legal a { color: var(--gold); text-underline-offset: 3px; }

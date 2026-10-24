@@ -6,40 +6,38 @@ import ContactForm from '../components/ContactForm.astro';
 <Layout title="Ivan Schmid – Unternehmer">
 	<main>
 		<section class="hero container">
-			<div class="hero-head">
-				<div>
-					<p class="eyebrow reveal">Unternehmer · Steffisburg</p>
-					<h1 class="reveal reveal-2">Ivan<br />Schmid</h1>
-				</div>
-				<div class="intro reveal reveal-3">
-					<p class="lead">
-						Ich bin Unternehmer aus Überzeugung. Seit über 25 Jahren baue ich Unternehmen, Produkte und digitale
-						Plattformen auf – unter anderem als Gründer von Payrexx, Hotelcard und Comvation.
-					</p>
-					<a class="partner" href="https://www.payrexx.com/?ref=s32026" target="_blank" rel="noopener">
-						<span class="partner-label">Offizieller</span>
-						<strong>Payrexx Solution Partner</strong>
-						<span class="partner-arrow" aria-hidden="true">↗</span>
-					</a>
-				</div>
-			</div>
+			<p class="caps eyebrow reveal">Unternehmer · Steffisburg</p>
+			<h1 class="reveal reveal-2">Ivan Schmid</h1>
+			<span class="rule reveal reveal-3" aria-hidden="true"></span>
+		</section>
 
-			<figure class="hero-image reveal reveal-3">
-				<img
-					src="/heronew.webp"
-					width="2560"
-					height="1100"
-					alt="Ivan Schmid an seinem Arbeitsplatz mit Blick auf den Thunersee"
-					fetchpriority="high"
-				/>
-			</figure>
+		<figure class="hero-image reveal-img">
+			<img
+				src="/heronew.webp"
+				width="2560"
+				height="1100"
+				alt="Ivan Schmid an seinem Arbeitsplatz mit Blick auf den Thunersee"
+				fetchpriority="high"
+			/>
+		</figure>
+
+		<section class="intro container">
+			<p class="lead">
+				Ich bin Unternehmer aus Überzeugung. Seit über 25 Jahren baue ich Unternehmen, Produkte und digitale
+				Plattformen auf – unter anderem als Gründer von Payrexx, Hotelcard und Comvation.
+			</p>
+			<a class="partner" href="https://www.payrexx.com/?ref=s32026" target="_blank" rel="noopener">
+				<span class="partner-rule" aria-hidden="true"></span>
+				<span class="caps">Offizieller Payrexx Solution Partner</span>
+				<span class="partner-arrow" aria-hidden="true">↗</span>
+			</a>
 		</section>
 
 		<section class="contact" id="kontakt" aria-labelledby="kontakt-titel">
 			<div class="container contact-inner">
 				<div class="contact-head">
-					<p class="eyebrow eyebrow-dark">Kontakt</p>
-					<h2 id="kontakt-titel">Schreiben Sie mir.</h2>
+					<p class="caps contact-eyebrow">Kontakt</p>
+					<h2 id="kontakt-titel">Ich freue mich<br /><em>auf Ihre Nachricht.</em></h2>
 				</div>
 				<ContactForm />
 			</div>
@@ -49,107 +47,40 @@ import ContactForm from '../components/ContactForm.astro';
 
 <style>
 	.hero {
-		padding-top: clamp(40px, 7vw, 96px);
-		padding-bottom: clamp(56px, 8vw, 112px);
-	}
-
-	.hero-head {
-		display: grid;
-		grid-template-columns: 1.1fr 1fr;
-		gap: clamp(24px, 5vw, 80px);
-		align-items: end;
-		margin-bottom: clamp(32px, 5vw, 64px);
+		text-align: center;
+		padding-top: clamp(64px, 10vw, 136px);
+		padding-bottom: clamp(48px, 7vw, 96px);
 	}
 
 	.eyebrow {
-		display: inline-flex;
-		align-items: center;
-		gap: 10px;
-		margin: 0 0 20px;
-		font-size: 13px;
-		font-weight: 600;
-		letter-spacing: 0.14em;
-		text-transform: uppercase;
-		color: var(--muted);
-	}
-
-	.eyebrow::before {
-		content: '';
-		width: 8px;
-		height: 8px;
-		border-radius: 50%;
-		background: var(--gold);
+		margin: 0 0 clamp(20px, 3vw, 32px);
+		color: var(--gold);
 	}
 
 	h1 {
 		margin: 0;
-		font-size: clamp(56px, 10vw, 136px);
-		line-height: 0.92;
-		font-weight: 800;
-		letter-spacing: -0.045em;
+		font-family: var(--serif);
+		font-weight: 300;
+		font-size: clamp(60px, 11vw, 168px);
+		line-height: 0.95;
+		letter-spacing: -0.015em;
 	}
 
-	.lead {
-		margin: 0;
-		font-size: clamp(19px, 1.9vw, 24px);
-		line-height: 1.5;
-		font-weight: 500;
-		letter-spacing: -0.01em;
-		color: var(--ink-2);
-		text-wrap: pretty;
-		max-width: 34em;
-	}
-
-	.partner {
-		display: inline-flex;
-		align-items: center;
-		gap: 8px;
-		margin-top: 28px;
-		padding: 10px 14px 10px 18px;
-		border: 1px solid var(--line);
-		border-radius: 999px;
-		font-size: 15px;
-		text-decoration: none;
-		color: var(--ink);
-		transition: background 0.2s, border-color 0.2s;
-	}
-
-	.partner-label {
-		color: var(--muted);
-	}
-
-	.partner strong {
-		font-weight: 700;
-	}
-
-	.partner-arrow {
-		display: grid;
-		place-items: center;
-		width: 26px;
-		height: 26px;
-		margin-left: 4px;
-		border-radius: 50%;
+	.rule {
+		display: block;
+		width: 1px;
+		height: clamp(40px, 6vw, 72px);
+		margin: clamp(32px, 4vw, 48px) auto 0;
 		background: var(--gold);
-		color: var(--ink);
-		font-size: 13px;
-		transition: transform 0.2s;
-	}
-
-	.partner:hover {
-		background: var(--paper-2);
-		border-color: var(--paper-2);
-	}
-
-	.partner:hover .partner-arrow {
-		transform: translate(2px, -2px);
 	}
 
 	.hero-image {
 		margin: 0;
-		border-radius: clamp(18px, 2.4vw, 32px);
 		overflow: hidden;
+		aspect-ratio: 2560 / 1040;
+		max-height: 82vh;
+		width: 100%;
 		background: var(--paper-2);
-		aspect-ratio: 2560 / 1100;
 	}
 
 	.hero-image img {
@@ -157,7 +88,61 @@ import ContactForm from '../components/ContactForm.astro';
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		object-position: 30% 50%;
+		object-position: 32% 25%;
+		scale: 1.035;
+		transform-origin: 0 0;
+	}
+
+	.intro {
+		max-width: 920px;
+		text-align: center;
+		padding-top: clamp(72px, 10vw, 144px);
+		padding-bottom: clamp(80px, 11vw, 160px);
+	}
+
+	.lead {
+		margin: 0;
+		font-family: var(--serif);
+		font-weight: 400;
+		font-size: clamp(26px, 3.1vw, 40px);
+		line-height: 1.35;
+		color: var(--ink);
+		text-wrap: balance;
+	}
+
+	.partner {
+		display: inline-flex;
+		align-items: center;
+		gap: 16px;
+		margin-top: clamp(40px, 5vw, 64px);
+		text-decoration: none;
+		color: var(--ink-2);
+		transition: color 0.4s var(--ease);
+	}
+
+	.partner-rule {
+		width: 40px;
+		height: 1px;
+		background: var(--gold);
+		transition: width 0.5s var(--ease);
+	}
+
+	.partner-arrow {
+		color: var(--gold);
+		font-size: 14px;
+		transition: transform 0.4s var(--ease);
+	}
+
+	.partner:hover {
+		color: var(--ink);
+	}
+
+	.partner:hover .partner-rule {
+		width: 64px;
+	}
+
+	.partner:hover .partner-arrow {
+		transform: translate(2px, -2px);
 	}
 
 	.contact {
@@ -167,26 +152,32 @@ import ContactForm from '../components/ContactForm.astro';
 
 	.contact-inner {
 		display: grid;
-		grid-template-columns: 1fr 1.2fr;
-		gap: clamp(32px, 6vw, 96px);
-		padding-top: clamp(64px, 9vw, 128px);
-		padding-bottom: clamp(64px, 9vw, 128px);
+		grid-template-columns: 1fr 1.15fr;
+		gap: clamp(48px, 8vw, 128px);
+		padding-top: clamp(88px, 11vw, 160px);
+		padding-bottom: clamp(88px, 11vw, 160px);
 	}
 
-	.eyebrow-dark {
-		color: rgba(255, 255, 255, 0.55);
+	.contact-eyebrow {
+		margin: 0 0 28px;
+		color: var(--gold-light);
 	}
 
 	h2 {
 		margin: 0;
-		font-size: clamp(36px, 4.2vw, 56px);
-		line-height: 1;
-		font-weight: 800;
-		letter-spacing: -0.035em;
+		font-family: var(--serif);
+		font-weight: 300;
+		font-size: clamp(42px, 4.6vw, 68px);
+		line-height: 1.05;
+		letter-spacing: -0.01em;
+	}
+
+	h2 em {
+		font-style: italic;
+		color: var(--gold-light);
 	}
 
 	@media (max-width: 860px) {
-		.hero-head,
 		.contact-inner {
 			grid-template-columns: 1fr;
 		}
@@ -194,15 +185,28 @@ import ContactForm from '../components/ContactForm.astro';
 		.hero-image {
 			aspect-ratio: 4 / 3;
 		}
-
-		.hero-image img {
-			object-position: 32% 50%;
-		}
 	}
 
 	@media (max-width: 520px) {
 		.hero-image {
 			aspect-ratio: 1 / 1;
+		}
+
+		.lead {
+			text-wrap: pretty;
+		}
+
+		.partner {
+			flex-direction: column;
+			gap: 14px;
+		}
+
+		.partner .caps {
+			letter-spacing: 0.22em;
+		}
+
+		.partner-arrow {
+			display: none;
 		}
 	}
 </style>
