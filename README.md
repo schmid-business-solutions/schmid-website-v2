@@ -1,34 +1,16 @@
-# ivanschmid.com
+# ivanschmid.com – Weiterleitung
 
-Astro-Projekt für die persönliche Website von Ivan Schmid (Schmid³ Business Solutions).
+Die frühere Website ivanschmid.com wurde eingestellt. Die Domain leitet dauerhaft (301) auf
+**https://www.schmidbusiness.ch** weiter (Repo `schmid-business-solutions/schmidbusiness.ch`).
 
-## Lokal entwickeln
+| Alte Adresse | Neues Ziel |
+| --- | --- |
+| `/impressum/` | `https://www.schmidbusiness.ch/impressum/` |
+| `/datenschutz/` | `https://www.schmidbusiness.ch/datenschutz/` |
+| `/agb/` | `https://www.schmidbusiness.ch/agb/` |
+| alles andere | `https://www.schmidbusiness.ch/` |
 
-```sh
-npm install
-npm run dev
-```
+- `public/.htaccess` – serverseitige 301-Weiterleitung (Apache/LiteSpeed)
+- `src/pages/*` – Fallback-Seiten mit Meta-Refresh und JavaScript, falls der Server keine `.htaccess` auswertet
 
-Dev-Server läuft unter `http://localhost:4321`.
-
-## Deployment
-
-Hostinger liest den Ordner `public/` direkt aus diesem Git-Repository (kein Node-Build auf dem Server).
-`public/` wird deshalb **nicht von Hand** bearbeitet, sondern automatisch aus den Astro-Quellen
-(`src/pages/index.astro`, `src/components/`) erzeugt:
-
-1. Änderungen an `src/` auf `main` pushen.
-2. GitHub Action (`.github/workflows/build-deploy.yml`) führt `npm run build` aus, das Ergebnis landet
-   direkt in `public/` (siehe `astro.config.mjs`: `outDir: './public'`).
-3. Die Action committet den aktualisierten `public/`-Ordner automatisch zurück auf `main`.
-4. Hostinger zieht den neuen Stand von GitHub (automatisch oder manuell im hPanel unter "Git").
-
-Statische Rohassets (Bilder, Favicon) liegen in `static-src/` (Astros `publicDir`), nicht in `public/`.
-
-**Wichtig:** Damit Schritt 3 funktioniert, muss unter GitHub → Settings → Actions → General →
-"Workflow permissions" die Option "Read and write permissions" aktiviert sein.
-
-## Kontaktformular
-
-`src/components/ContactForm.astro` versendet Anfragen über [EmailJS](https://www.emailjs.com)
-(Service `service_ivanschmid`, Template `template_ivanschmid`) an office@ivanschmid.com.
+Die alte Website ist in der Git-Historie erhalten (letzter Stand: Commit `9122205`).

@@ -1,0 +1,26 @@
+---
+// Weiterleitung auf schmidbusiness.ch (Fallback, falls der Server die .htaccess nicht auswertet)
+interface Props {
+	to: string;
+}
+const { to } = Astro.props;
+const target = new URL(to, 'https://www.schmidbusiness.ch').href;
+---
+
+<!doctype html>
+<html lang="de-CH">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="robots" content="noindex" />
+		<meta http-equiv="refresh" content={`0; url=${target}`} />
+		<link rel="canonical" href={target} />
+		<title>Weiterleitung zu schmidbusiness.ch</title>
+		<script is:inline define:vars={{ target }}>
+			window.location.replace(target);
+		</script>
+	</head>
+	<body>
+		<p>Diese Website ist umgezogen: <a href={target}>{target}</a></p>
+	</body>
+</html>

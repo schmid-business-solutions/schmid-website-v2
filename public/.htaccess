@@ -1,0 +1,6 @@
+# ivanschmid.com ist umgezogen: permanente Weiterleitung (301) auf www.schmidbusiness.ch
+RewriteEngine On
+RewriteRule ^impressum/?$ https://www.schmidbusiness.ch/impressum/ [R=301,L]
+RewriteRule ^datenschutz/?$ https://www.schmidbusiness.ch/datenschutz/ [R=301,L]
+RewriteRule ^agb/?$ https://www.schmidbusiness.ch/agb/ [R=301,L]
+RewriteRule ^ https://www.schmidbusiness.ch/ [R=301,L]
